@@ -1,0 +1,40 @@
+Naming Conventions:
+			We will use the naming convention just like JAVA.
+			Variables	:	lowerCamelCase
+			Classes		:	UpperCamelCase
+			Methods		:	lowerCamelCase
+			Constants	:	UPPERCASE_SEPARATED_BY_UNDERSCORE
+
+
+
+Indent Style:
+			Indent Style	:	Allman Style ( http://en.wikipedia.org/wiki/Indent_style#Allman_style )
+			Indent Space	:	1TBS
+			
+			/*
+			 * For example : 
+			 * Something like this.
+			 */
+
+			if(x==1)
+			{			
+				while (x == y)
+				{
+  		 			something();
+  					somethingelse();
+				}
+			}
+
+
+
+Commenting:
+			We will follow the usual commenting style of JAVA and HTML.
+
+
+
+Spacing:
+			We will use "Linux kernel style" for use of spaces mostly.
+
+
+
+
