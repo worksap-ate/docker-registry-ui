@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<head>
+	<title>Get Search List</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js" type="text/javascript"></script>
+	<script src="app.js" type="text/javascript"></script>
+	<script src="maincontroller.js" type="text/javascript"></script>
+</head>
+<body>
+	<div id='content' ng-app='DockerWebUI' ng-controller='MainController'>
+		{{namespaces}}<br/>
+		{{images}}
+	</div>
+</body>
+</html>
