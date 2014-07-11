@@ -8,7 +8,7 @@
 <body>
 	<div id='content' ng-app='DockerWebUI' ng-controller='NamespacesController'>
 		<li ng-repeat="(namespace,listOfRepositories) in dictionary">
-			<a ng-href="showRepositories.html?namespace={{namespace}}">{{namespace}}</a>
+			<a ng-href="showRepositories.html#/?namespace={{namespace}}">{{namespace}}</a>
 		</li>
 	</div>
 	

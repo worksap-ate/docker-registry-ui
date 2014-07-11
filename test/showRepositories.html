@@ -9,7 +9,7 @@
 	<a href="./home.html">HOME</a>
 	<div id='content' ng-app='DockerWebUI' ng-controller='RepositoriesController'>
 		<div ng-repeat="repository in repositoriesList">
-			<a ng-href="./showImages.html?namespace={{namespace}}&repository={{repository}}">{{repository}}</a>
+			<a ng-href="./showImages.html#/?namespace={{namespace}}&repository={{repository}}">{{repository}}</a>
 		</div>	
 	</div>
 </body>
