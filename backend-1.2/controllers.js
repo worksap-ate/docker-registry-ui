@@ -49,7 +49,7 @@ var ImagesController = function ($scope,$http,$location)
 	URL='http://192.168.1.15/v1/repositories/'+$scope.namespace+'/'+$scope.repository+'/tags';
 	$scope.deleteTag = function (tag)
 	{
-			$http({method: "delete",url: URL+'/'+tag}).success(function (data)
+			$http.delete(URL+'/'+tag).success(function (data)
 			{
 				alert('Deleted tag : '+tag);
 			}).error(function(data){alert('Unable to delete.')});;
