@@ -1,0 +1,21 @@
+<div class="panel-body">				
+	<div class="wrap">
+		<!-- Define all of the tiles: -->
+		<div id='content' ng-app='DockerWebUI' ng-controller='RepositoriesController'>
+			<div  ng-repeat="repository in repositoriesList">	
+				<div class="box">
+					<div class="boxInner">
+						<center>
+							<h3>{{repository}}</h3>
+						</center>
+						<div class="titleBox">
+							Description of {{repository}}
+						</div>
+					</div>
+				</div>
+			</div>						
+		</div>
+	<!-- /#content -->
+	</div>
+	<!-- /#wrap -->
+</div>
