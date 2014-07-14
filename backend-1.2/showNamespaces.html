@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<head>
+	<title>All Namespaces</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js" type="text/javascript"></script>
+	<script src="app.js" type="text/javascript"></script>
+	<script src="controllers.js" type="text/javascript"></script>
+</head>
+<body>
+	<div id='content' ng-app='DockerWebUI' ng-controller='NamespacesController'>
+		<li ng-repeat="(namespace,listOfRepositories) in dictionary">
+			<a ng-href="showRepositories.html#/?namespace={{namespace}}">{{namespace}}</a>
+		</li>
+	</div>
+	
+</body>
+</html>
