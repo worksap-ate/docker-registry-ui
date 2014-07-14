@@ -1,0 +1,43 @@
+<div class="jumbotron text-center">
+	<div class="row">
+		<h2>Welcome to Docker Registry WebUI</h2>
+		<div class="col-lg-4">
+		</div>
+		<div class="col-lg-4">
+			<div class="panel-body">
+				<!-- Button trigger modal -->
+				<button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
+					Set Registry IP
+				</button>
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<center><h4 class="modal-title" id="myModalLabel">Set registry IP</h4></center>
+								</div>
+								<div class="modal-body">
+									<form role="form" >
+										<div class="form-group">
+											<label>Enter IP address</label>
+											<input class="form-control" placeholder="IP Address" ng-model="inputIP">
+										</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<center><button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" ng-click="setIP(inputIP)" >Confirm</button></center>
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+					<!-- /.modal-dialog -->
+					</div>
+				<!-- /.modal -->
+			</div>
+			<!-- .panel-body -->
+		</div>
+		<div class="col-lg-4">
+		</div>				
+	</div>	
+</div>
