@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<!-- define angular app -->
+<html ng-app="DockerWebUI">
+
+<head>
+  
+ 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <title>Docker Web UI</title>
+
+    <!-- Core CSS - Include with every page -->
+    <link href="includes/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="includes/bootstrap/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Page-Level Plugin CSS - Dashboard -->
+    <link href="includes/bootstrap/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+    <link href="includes/bootstrap/css/plugins/timeline/timeline.css" rel="stylesheet">
+
+    <!-- SB Admin CSS - Include with every page -->
+    <link href="includes/bootstrap/css/sb-admin.css" rel="stylesheet">
+    
+    
+  
+    
+      <style type="text/css">
+    body {
+      margin: 0;
+      padding: 0;
+      background: #EEE;
+      font: 10px/13px 'Lucida Sans',sans-serif;
+    }
+    .wrap {
+      overflow: hidden;
+      margin: 10px;
+    }
+    .box {
+      float: left;
+      position: relative;
+      width: 20%;
+      padding-bottom: 20%;
+    }
+    .boxInner {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      top: 10px;
+      bottom: 10px;
+      overflow: hidden;
+      background: #EBEBEB;
+    }
+    .boxInner img {
+      width: 100%;
+      
+    }
+    .boxInner .titleBox {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin-bottom: -50px;
+      background: #000;
+      background: rgba(0, 0, 0, 0.5);
+      color: #FFF;
+      padding: 10px;
+      text-align: center;
+      -webkit-transition: all 0.3s ease-out;
+      -moz-transition: all 0.3s ease-out;
+      -o-transition: all 0.3s ease-out;
+      transition: all 0.3s ease-out;
+    }
+    body.no-touch .boxInner:hover .titleBox, body.touch .boxInner.touchFocus .titleBox {
+      margin-bottom: 0;
+    }
+    @media only screen and (max-width : 480px) {
+      /* Smartphone view: 1 tile */
+      .box {
+        width: 100%;
+        padding-bottom: 100%;
+      }
+    }
+    @media only screen and (max-width : 650px) and (min-width : 481px) {
+      /* Tablet view: 2 tiles */
+      .box {
+        width: 50%;
+        padding-bottom: 50%;
+      }
+    }
+    @media only screen and (max-width : 1050px) and (min-width : 651px) {
+      /* Small desktop / ipad view: 3 tiles */
+      .box {
+        width: 33.3%;
+        padding-bottom: 33.3%;
+      }
+    }
+    @media only screen and (max-width : 1290px) and (min-width : 1051px) {
+      /* Medium desktop: 4 tiles */
+      .box {
+        width: 25%;
+        padding-bottom: 25%;
+      }
+    }
+  </style>
+  <!-- Enable media queries for old IE -->
+  <!--[if lt IE 9]>
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+  <![endif]-->
+    
+
+</head>
+
+<!-- define angular controller -->
+<body class="no-touch"  ng-controller="MainController">
+
+<div id="wrapper">
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <div class="panel-body">
+					<a href="#showNamespaces">			
+						<button type="button" class="btn btn-primary btn-circle" >D</button>
+					</a>
+				</div>
+            </div>
+            <!-- /.navbar-header -->
+		<ul class="nav navbar-top-links navbar-right">
+			<div class="panel-body">
+				<!-- Button trigger modal -->
+				<button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
+					Change Registry
+                </button>
+                <!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<center><h4 class="modal-title" id="myModalLabel">Change registry</h4></center>
+							</div>
+							<div class="modal-body">
+								<form role="form" >
+									<div class="form-group">
+										<label>Enter IP address</label>
+                                        <input class="form-control" placeholder="IP Address" ng-model="inputIP">
+                                    </div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<center><button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" ng-click="setIP(inputIP)" >Confirm</button></center>
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+			</div>
+            <!-- .panel-body -->
+				
+        
+		</ul>
+        </nav>
+        <br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="row">
+					<div class="col-lg-1">
+					</div>
+					<div class="col-lg-5">
+						<div class="input-group custom-search-form">
+							<input type="text" class="form-control">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+								</span>
+						</div>
+					</div>
+				</div>					
+			</div>
+			<div class="col-lg-4"><center><h4>All Namespaces</h4></center></div>
+			<div class="col-lg-4">
+				
+				<div class="row">
+					<div class="col-lg-6"></div>
+					<div class="col-lg-1">
+						<label><h5>Sort</h5></label>
+					</div>
+					<div class="col-lg-4">
+						<div class="form-group">
+								<select class="form-control">
+									<option>Name</option>
+									<option>Date</option>
+								</select>
+						</div>
+					</div>
+					
+				</div>
+			</div>						
+		</div>
+		 
+		 
+		 <div class="panel panel-default">
+			<div class="panel-body"> 
+				<div id="main">
+					<div ng-view></div> 
+				</div>
+			</div>
+			<!--
+			<div class="panel-footer">
+				<li><a href="#"> Home</a></li>
+				<li><a href="#showNamespaces">showNamespaces</a></li>
+			</div>
+			-->
+		</div>					
+		
+</div>
+
+
+
+<!-- Core Scripts - Include with every page -->
+    <script src="includes/bootstrap/js/jquery-1.10.2.js"></script>
+    <script src="includes/bootstrap/js/bootstrap.min.js"></script>
+    <script src="includes/bootstrap/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!-- Page-Level Plugin Scripts - Dashboard -->
+    <script src="includes/bootstrap/js/plugins/morris/raphael-2.1.0.min.js"></script>
+    <script src="includes/bootstrap/js/plugins/morris/morris.js"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script>
+	<script src="script.js" type="text/javascript"></script>
+
+    <!-- SB Admin Scripts - Include with every page -->
+    <script src="includes/bootstrap/js/sb-admin.js"></script>
+    <script src="includes/bootstrap/js/tile.js"></script>
+
+    <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
+    <script src="includes/bootstrap/js/demo/dashboard-demo.js"></script>
+    
+    
+    <!-- Add some JavaScript to enable toggling the descriptions when an image is tapped on a touchscreen device -->
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      // See if this is a touch device
+      if ('ontouchstart' in window)
+      {
+        // Set the correct body class
+        $('body').removeClass('no-touch').addClass('touch');
+        
+        // Add the touch toggle to show text
+        $('div.boxInner img').click(function(){
+          $(this).closest('.boxInner').toggleClass('touchFocus');
+        });
+      }
+    });
+  </script>
+
+</body>
+
+</html>
