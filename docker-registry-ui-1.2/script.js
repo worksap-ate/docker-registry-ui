@@ -98,8 +98,10 @@ app.controller('NamespacesController', function($rootScope,$scope,$http,IPServic
 		});	
 		angular.forEach($scope.dictionary,function(key,value)
 		{
-			$scope.namespacesList.push(value);
-		});	
+			temp={};
+			temp['name']=value;
+			$scope.namespacesList.push(temp);
+		});
 	}).error(function(data){alert('Unable to reuest.')});
 
 });
@@ -120,9 +122,13 @@ app.controller('RepositoriesController', function($scope,$http,$location,IPServi
 		angular.forEach(results,function(result)
 		{
 			if(result.name.split('/')[0]===$scope.namespace)
-				$scope.repositoriesList.push(result.name.split('/')[1]);
+			{
+				temp={};
+				temp['name']=result.name.split('/')[1];
+				$scope.repositoriesList.push(temp);
+			}
 		});		
-	}).error(function(data){$scope.num_results=-1;});
+	}).error(function(data){alert('Unable to request.')});
 });
 
 //Show images controller, all JS code for showImages page is here
@@ -144,7 +150,9 @@ app.controller('ImagesController', function($scope,$http,$location,IPService) {
 		$scope.results=data;
 		angular.forEach($scope.results,function(key,value)
 		{
-			$scope.tagsList.push(value);
+			temp={};
+			temp['name']=value;
+			$scope.tagsList.push(temp);
 		});		
 	}).error(function(data){alert('Unable to request.')});
 });

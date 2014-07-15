@@ -23,9 +23,9 @@
 			</div>
 			<div class="col-lg-4">
 				<div class="form-group">
-						<select class="form-control">
-							<option>Name</option>
-							<option>Date</option>
+						<select class="form-control" ng-model="orderProp">
+							<option value="name">Name Asc.</option>
+							<option value="-name">Name Dec.</option>
 						</select>
 				</div>
 			</div>
@@ -39,13 +39,13 @@
 		<div class="panel-body">	
 			<div class="wrap">
 				<div id='content'>
-					<div  ng-repeat="namespace in namespacesList | filter:queryNamespace">	
-						<a href="#showRepositories?namespace={{namespace}}">
+					<div  ng-repeat="namespace in namespacesList | filter:queryNamespace | orderBy:orderProp">
+						<a href="#showRepositories?namespace={{namespace.name}}">
 							<div class="box">
 								<div class="boxInner">
-									<center><h3>{{namespace}}</h3></center>
+									<center><h3>{{namespace.name}}</h3></center>
 									<div class="titleBox">
-										Description of {{namespace}}
+										Description of {{namespace.name}}
 									</div>
 								</div>	
 							</div>
