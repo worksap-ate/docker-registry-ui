@@ -25,7 +25,7 @@ RE_USER_AGENT = re.compile('([^\s/]+)/([^\s/]+)')
 
 
 @app.route('/v1/repositories/<path:repository>/properties', methods=['PUT'])
-@flask_cors.cross_origin(methods=['GET', 'HEAD', 'POST', 'OPTIONS', 'PUT'])  # allow all origins (*)
+@flask_cors.cross_origin(methods=['GET', 'HEAD', 'POST', 'OPTIONS', 'PUT','DELETE'])  # allow all origins (*)
 @toolkit.parse_repository_name
 @toolkit.requires_auth
 def set_properties(namespace, repo):
@@ -52,7 +52,7 @@ def set_properties(namespace, repo):
 
 
 @app.route('/v1/repositories/<path:repository>/properties', methods=['GET'])
-@flask_cors.cross_origin(methods=['GET', 'HEAD', 'POST', 'OPTIONS', 'PUT'])  # allow all origins (*)
+@flask_cors.cross_origin(methods=['GET', 'HEAD', 'POST', 'OPTIONS', 'PUT','DELETE'])  # allow all origins (*)
 @toolkit.parse_repository_name
 @toolkit.requires_auth
 def get_properties(namespace, repo):
@@ -76,7 +76,7 @@ def get_tags(namespace, repository):
 
 
 @app.route('/v1/repositories/<path:repository>/tags', methods=['GET'])
-@flask_cors.cross_origin(methods=['GET', 'HEAD', 'POST', 'OPTIONS', 'PUT'])  # allow all origins (*)
+@flask_cors.cross_origin(methods=['GET', 'HEAD', 'POST', 'OPTIONS', 'PUT','DELETE'])  # allow all origins (*)
 @toolkit.parse_repository_name
 @toolkit.requires_auth
 @mirroring.source_lookup_tag
@@ -93,7 +93,7 @@ def _get_tags(namespace, repository):
 
 
 @app.route('/v1/repositories/<path:repository>/tags/<tag>', methods=['GET'])
-@flask_cors.cross_origin(methods=['GET', 'HEAD', 'POST', 'OPTIONS', 'PUT'])  # allow all origins (*)
+@flask_cors.cross_origin(methods=['GET', 'HEAD', 'POST', 'OPTIONS', 'PUT','DELETE'])  # allow all origins (*)
 @toolkit.parse_repository_name
 @toolkit.requires_auth
 @mirroring.source_lookup_tag
@@ -112,7 +112,7 @@ def get_tag(namespace, repository, tag):
 # warning: this endpoint is deprecated in favor of tag-specific json
 # implemented by get_repository_tag_json
 @app.route('/v1/repositories/<path:repository>/json', methods=['GET'])
-@flask_cors.cross_origin(methods=['GET', 'HEAD', 'POST', 'OPTIONS', 'PUT'])  # allow all origins (*)
+@flask_cors.cross_origin(methods=['GET', 'HEAD', 'POST', 'OPTIONS', 'PUT','DELETE'])  # allow all origins (*)
 @toolkit.parse_repository_name
 @toolkit.requires_auth
 @mirroring.source_lookup(stream=False, cache=True)
@@ -141,7 +141,7 @@ def get_repository_json(namespace, repository):
 @app.route(
     '/v1/repositories/<path:repository>/tags/<tag>/json',
     methods=['GET'])
-@flask_cors.cross_origin(methods=['GET', 'HEAD', 'POST', 'OPTIONS', 'PUT'])  # allow all origins (*)
+@flask_cors.cross_origin(methods=['GET', 'HEAD', 'POST', 'OPTIONS', 'PUT','DELETE'])  # allow all origins (*)
 @toolkit.parse_repository_name
 @toolkit.requires_auth
 def get_repository_tag_json(namespace, repository, tag):
@@ -178,7 +178,7 @@ def create_tag_json(user_agent):
 
 @app.route('/v1/repositories/<path:repository>/tags/<tag>',
            methods=['PUT'])
-@flask_cors.cross_origin(methods=['GET', 'HEAD', 'POST', 'OPTIONS', 'PUT'])  # allow all origins (*)
+@flask_cors.cross_origin(methods=['GET', 'HEAD', 'POST', 'OPTIONS', 'PUT','DELETE'])  # allow all origins (*)
 @toolkit.parse_repository_name
 @toolkit.requires_auth
 def put_tag(namespace, repository, tag):
