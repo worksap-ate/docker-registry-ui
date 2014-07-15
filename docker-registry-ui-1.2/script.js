@@ -107,7 +107,7 @@ app.controller('NamespacesController', function($rootScope,$scope,$http,IPServic
 });
 
 //Show repositories controller, all JS code for showRepositories page is here
-app.controller('RepositoriesController', function($scope,$http,$location,IPService) {
+app.controller('RepositoriesController', function($scope,$http,$location,IPService,$window) {
 	$scope.IP=IPService.getIP();
 	$scope.namespace=$location.search()['namespace'];
 	$scope.num_results=0;
@@ -132,7 +132,7 @@ app.controller('RepositoriesController', function($scope,$http,$location,IPServi
 });
 
 //Show images controller, all JS code for showImages page is here
-app.controller('ImagesController', function($scope,$http,$location,IPService) {
+app.controller('ImagesController', function($scope,$http,$location,IPService,$window) {
 	$scope.IP=IPService.getIP();
 	$scope.namespace=$location.search()['namespace'];
 	$scope.repository=$location.search()['repository'];
@@ -143,6 +143,7 @@ app.controller('ImagesController', function($scope,$http,$location,IPService) {
 			$http.delete(URL+'/'+tag).success(function (data)
 			{
 				alert('Deleted tag : '+tag);
+				$window.location.href = "#showImages?namespace="+$scope.namespace+"&repository="+$scope.repository;
 			}).error(function(data){alert('Unable to delete.')});;
 	};
 	$http({method: 'GET', url: URL }).success(function(data)

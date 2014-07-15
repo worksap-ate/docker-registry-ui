@@ -39,10 +39,31 @@
 		<div class="panel-body">	
 			<div class="wrap">
 				<div id='content'>
+					<div class="row">
+						<div class="col-lg-3">
+							<h3>Repository</h3>
+						</div>
+						<div class="col-lg-1">
+							<h3>Tag</h3>
+						</div>		
+					</div>	
 					<div  ng-repeat="tag in tagsList | filter:queryTag | orderBy:orderProp">	
-						<li>
-							{{tag.name}} <button type="button" ng-click="deleteTag(tag.name)">Delete Me!</button>
-						</li>
+						<div class="alert alert-success">
+                               .	
+							<div class="row">							
+								<div class="col-lg-3">
+									<h4>{{repository}}</h4>
+								</div>
+								<div class="col-lg-1">
+									<h4>{{tag.name}}</h4>
+								</div>
+								<div class="col-lg-1">
+									<!--	<button type="button" class="btn btn-outline btn-danger" ng-click="deleteTag(tag.name)">Delete</button> -->
+										<button type="button" class="btn btn-warning btn-circle" ng-click="deleteTag(tag.name)"><i class="fa fa-times"></i></button>
+								</div>		 
+							</div>
+						
+						</div>
 					</div>	
 				</div>
 			 </div>
