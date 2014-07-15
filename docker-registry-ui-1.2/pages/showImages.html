@@ -6,7 +6,7 @@
 			</div>
 			<div class="col-lg-5">
 				<div class="input-group custom-search-form">
-					<input type="text" class="form-control">
+					<input type="text" class="form-control" ng-model="queryTag">
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
 						</span>
@@ -36,11 +36,16 @@
 
 <div class="panel panel-default">
 	<div class="panel-body"> 
-		<div ng-repeat="tag in tagsList">
-			<li>
-				{{tag}}
-				<button type="button" ng-click="deleteTag(tag)">Delete Me!</button>
-			</li>
+		<div class="panel-body">	
+			<div class="wrap">
+				<div id='content'>
+					<div  ng-repeat="tag in tagsList | filter:queryTag">	
+						<li>
+							{{tag}} <button type="button" ng-click="deleteTag(tag)">Delete Me!</button>
+						</li>
+					</div>	
+				</div>
+			 </div>
 		</div>
-	</div>
+	</div>	
 </div>

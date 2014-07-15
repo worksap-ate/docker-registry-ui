@@ -77,9 +77,10 @@ app.controller('NamespacesController', function($rootScope,$scope,$http,IPServic
 	console.log('the ip is ' + $scope.IP);
 	$scope.num_results=0;
 	$scope.dictionary={};
+	$scope.namespacesList=[];
 	results=[];
-	namespaces=[];
-	images=[];
+	//namespaces=[];
+	//images=[];
 	
 	$http({method: 'GET', url: 'http://'+$scope.IP+'/v1/search'}).success(function(data)
 	{
@@ -91,11 +92,15 @@ app.controller('NamespacesController', function($rootScope,$scope,$http,IPServic
 		});
 		angular.forEach(results,function(result)
 		{
-			namespaces.push(result.name.split('/')[0]);
-			images.push(result.name.split('/')[1]);
+			//namespaces.push(result.name.split('/')[0]);
+			//images.push(result.name.split('/')[1]);
 			$scope.dictionary[result.name.split('/')[0]].push(result.name.split('/')[1]);
-		});		
-	}).error(function(data){$scope.num_results=-1;});
+		});	
+		angular.forEach($scope.dictionary,function(key,value)
+		{
+			$scope.namespacesList.push(value);
+		});	
+	}).error(function(data){alert('Unable to reuest.')});
 
 });
 
