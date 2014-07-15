@@ -134,18 +134,51 @@ app.controller('RepositoriesController', function($scope,$http,$location,IPServi
 //Show images controller, all JS code for showImages page is here
 app.controller('ImagesController', function($scope,$http,$location,IPService,$window) {
 	$scope.IP=IPService.getIP();
+	//$scope.newTag='';
 	$scope.namespace=$location.search()['namespace'];
 	$scope.repository=$location.search()['repository'];
 	$scope.tagsList=[];
 	URL='http://'+$scope.IP+'/v1/repositories/'+$scope.namespace+'/'+$scope.repository+'/tags';
 	$scope.deleteTag = function (tag)
 	{
+			
 			$http.delete(URL+'/'+tag).success(function (data)
 			{
 				alert('Deleted tag : '+tag);
 				$window.location.href = "#showImages?namespace="+$scope.namespace+"&repository="+$scope.repository;
 			}).error(function(data){alert('Unable to delete.')});;
 	};
+	
+	$scope.changeTag = function (oldTag,newTag)
+	{
+		alert("tag is " + oldTag);
+		$scope.URL2=URL+'/'+oldTag;
+		$scope.URL3=URL+'/'+newTag;
+		$scope.imageID="";
+		console.log('image id fetch url is '+ $scope.URL2);
+		console.log('tag putting url is ' + $scope.URL3);
+		console.log('new tag is '+ newTag);
+		$http({method: 'GET', url: $scope.URL2 }).success(function(data)
+		{
+			
+			$scope.imageID=data.replace(/"/g,'');
+			alert("the imageID is " + $scope.imageID);		
+		}).error(function(data){console.log('Unable to get image ID for tag')});
+		
+		$http({method: 'PUT', url: $scope.URL3, data:$scope.imageID}).success(function(data)
+		{
+			alert("Success ");		
+		}).error(function(data){console.log('Unable to set tag for imageID')});
+		
+		/*
+		$http.delete(URL+'/'+tag).success(function (data)
+			{
+				alert('Deleted tag : '+tag);
+				$window.location.href = "#showImages?namespace="+$scope.namespace+"&repository="+$scope.repository;
+			}).error(function(data){alert('Unable to delete.')});;
+		*/
+	}
+	
 	$http({method: 'GET', url: URL }).success(function(data)
 	{
 		$scope.results=data;
