@@ -28,6 +28,12 @@ app.config(function($routeProvider) {
 			templateUrl : 'pages/showNamespaces.html',
 			controller  : 'NamespacesController'
 		})
+		
+		// route for the showNamespacesRepos page
+		.when('/showNamespacesRepos', {
+			templateUrl : 'pages/showNamespacesRepos.html',
+			controller  : 'NamespacesReposController'
+		})
 
 		// route for the showRepositories page
 		.when('/showRepositories', {
@@ -110,6 +116,22 @@ app.controller('NamespacesController', function($rootScope,$scope,$http,IPServic
 			temp['name']=value;
 			$scope.namespacesList.push(temp);
 		});
+	}).error(function(data){alert('Unable to reuest.')});
+
+});
+
+//Show NamespacesRepos controller, all JS code for showNamespaces page is here
+app.controller('NamespacesReposController', function($rootScope,$scope,$http,IPService,$route,$cookies) {
+	
+	$scope.message = 'shownamespaces page';
+	$scope.IP=$cookies.IP;
+	console.log('the ip is ' + $scope.IP);
+	$scope.num_results=0;
+	$scope.namespacesReposList=[];
+	$http({method: 'GET', url: 'http://'+$scope.IP+'/v1/search'}).success(function(data)
+	{
+		$scope.num_results=data.num_results;
+		$scope.namespacesReposList=data.results;
 	}).error(function(data){alert('Unable to reuest.')});
 
 });
