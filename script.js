@@ -174,7 +174,7 @@ app.controller('ImagesController', function($scope,$http,$location,IPService,$wi
 			alert("the imageID is " + $scope.imageID);		
 		}).error(function(data){console.log('Unable to get image ID for tag')});
 		
-		$http({method: 'PUT', url: $scope.URL3, data:$scope.imageID}).success(function(data)
+		$http({method: 'PUT', url: $scope.URL3, data:'\"'+$scope.imageID+'\"' , headers: {"Content-Type": "application/json","Accept": "application/json"}}).success(function(data)
 		{
 			alert("Success ");		
 		}).error(function(data){console.log('Unable to set tag for imageID')});
