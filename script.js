@@ -153,40 +153,51 @@ app.controller('ImagesController', function($scope,$http,$location,IPService,$wi
 			
 			$http.delete(URL+'/'+tag).success(function (data)
 			{
-				alert('Deleted tag : '+tag);
+				console.log('Deleted tag : '+tag);
 				$window.location.href = "#showImages?namespace="+$scope.namespace+"&repository="+$scope.repository;
 			}).error(function(data){alert('Unable to delete.')});;
 	};
 	
+	/*This function gets 2 parameters the old tag before editand the new tag after edit.
+	 * This function will delete the old tag after getting the image id attached to it, use this image ID
+	 * to put the new tag in the repository, thus having the same effect as editing a tag.
+	 */ 
 	$scope.changeTag = function (oldTag,newTag)
 	{
-		alert("tag is " + oldTag);
-		$scope.URL2=URL+'/'+oldTag;
-		$scope.URL3=URL+'/'+newTag;
-		$scope.imageID="";
-		console.log('image id fetch url is '+ $scope.URL2);
-		console.log('tag putting url is ' + $scope.URL3);
+		$scope.oldTagURL=URL+'/'+oldTag;
+		$scope.newTagURL=URL+'/'+newTag;
+		$scope.imageID='';
+		imageId='\"hello\"';
+		console.log('image id fetch url is '+ $scope.oldTagURL);
+		console.log('tag putting url is ' + $scope.newTagURL);
 		console.log('new tag is '+ newTag);
-		$http({method: 'GET', url: $scope.URL2 }).success(function(data)
+		$http({method: 'GET', url: $scope.oldTagURL }).success(function(data)
 		{
-			//console.log('Data fetched : '+data);
-			//$scope.imageID=data.replace(/"/g,'');
-			$scope.imageID=data;
-			alert("the imageID is " + $scope.imageID);		
+			console.log('Data fetched : '+data);
+			imageId='\"'+data.replace(/"/g,'')+'\"';
+			
+			
+			$http({method: 'PUT', url: $scope.newTagURL, data: imageId , headers: {"Content-Type": "application/json","Accept": "application/json"}}).success(function(data)
+			{
+				$http.delete($scope.oldTagURL).success(function (data)
+				{
+					
+					$window.location.href = "#showImages?namespace="+$scope.namespace+"&repository="+$scope.repository;
+				}).error(function(data){alert('Unable to delete.')});
+				
+						
+			}).error(function(data){
+				console.log('Unable to set tag for imageID');
+				
+				});
+			
+					
 		}).error(function(data){console.log('Unable to get image ID for tag')});
 		
-		$http({method: 'PUT', url: $scope.URL3, data:$scope.imageID , headers: {"Content-Type": "application/json","Accept": "application/json"}}).success(function(data)
-		{
-			alert("Success ");		
-		}).error(function(data){console.log('Unable to set tag for imageID')});
 		
-		/*
-		$http.delete(URL+'/'+tag).success(function (data)
-			{
-				alert('Deleted tag : '+tag);
-				$window.location.href = "#showImages?namespace="+$scope.namespace+"&repository="+$scope.repository;
-			}).error(function(data){alert('Unable to delete.')});;
-		*/
+		
+		
+		
 	}
 	
 	$http({method: 'GET', url: URL }).success(function(data)
