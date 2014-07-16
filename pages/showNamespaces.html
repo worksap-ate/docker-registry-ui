@@ -13,17 +13,20 @@
 			</div>
 		</div>					
 	</div>
+	
 	<div class="col-lg-4"><center><h4> All Namespaces </h4></center></div>
+			
 	<div class="col-lg-4">
-		
 		<div class="row">
-			<div class="col-lg-6"></div>
+			<div class="col-lg-4"></div>
+			<div class="col-lg-2">
+				<button type="button" class="btn btn-primary btn-sm" onclick=(window.location.assign("#showNamespacesRepos"))>Toggle</button>
+			</div>
 			<div class="col-lg-1">
 				<label><h5>Sort</h5></label>
 			</div>
 			<div class="col-lg-4">
 				<div class="form-group">
-						<button onclick=(window.location.assign("#showNamespacesRepos"))>Toggle</button>
 						<select class="form-control" ng-model="orderProp">
 							<option value="name">Name Asc.</option>
 							<option value="-name">Name Dec.</option>
