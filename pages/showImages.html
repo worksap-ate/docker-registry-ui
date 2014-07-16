@@ -60,7 +60,11 @@
 									<button type="button" class="btn btn-warning btn-circle" ng-click="deleteTag(tag.name)"><i class="fa fa-times"></i></button>
 								</div>
 								<div class="col-lg-1">
-									<button type="button" class="btn btn-info btn-circle" ><i class="fa fa-check"></i></button>					
+										
+									<div id="popover">
+										<button type="button" class="btn btn-info btn-circle"  ><i class="fa fa-check"></i></button>	
+										<div id="popover-popup">docker pull {{IP}}/{{namespace}}/{{repository}}:{{tag.name}}</div> 
+									</div>			
 								</div>
 								<div class="col-lg-1">
 									<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#tagModal{{tag.id}}" >Edit Tag</button>

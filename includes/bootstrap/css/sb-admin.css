@@ -382,3 +382,39 @@ table.dataTable thead .sorting:after {
   text-align:center; 
 }
 
+#popover {
+    background: #none;
+    padding: 0px;
+    display: block;
+    position: relative;
+}
+
+#popover:hover {
+    background: none;
+    
+}
+
+
+
+#popover-popup {
+    opacity: 0;
+    position: absolute;
+    top: 32px;
+    background: #fafafa;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    height: 0px;
+    padding: 0 12px;
+    overflow: hidden;
+    -webkit-transition: all 500ms;
+    transition: all 500ms;
+}
+
+
+#popover:hover #popover-popup {
+    padding: 12px 12px;
+    height: auto;
+    opacity: 1;
+    border: 1px solid #eeeeee;
+}
+
