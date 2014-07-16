@@ -62,9 +62,9 @@
 									<button type="button" class="btn btn-warning btn-circle" ng-click="deleteTag(tag.name)"><i class="fa fa-times"></i></button>
 								</div>
 								<div class="col-lg-1">
-									<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#tagModal" >Edit Tag</button>
+									<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#tagModal{{tag.id}}" >Edit Tag</button>
 									<!-- Modal -->
-									<div class="modal fade" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+									<div class="modal fade" id="tagModal{{tag.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
