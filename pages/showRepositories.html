@@ -36,10 +36,12 @@
 			<div class="wrap">
 				<div id='content'>
 					<div  ng-repeat="repository in repositoriesList | filter:queryRepository | orderBy:orderProp" or>	
-						<a href="#showImages?namespace={{namespace}}&repository={{repository.name}}">
+					<!--	<a href="#showImages?namespace={{namespace}}&repository={{repository.name}}">-->
 							<div class="box">
 								<div class="boxInner">
+									<a href="#showImages?namespace={{namespace}}&repository={{repository.name}}">
 									<center><h3>{{repository.name}}</h3></center>
+									</a>
 									<div class="titleBox">
 										Delete Repo 
 										&nbsp; &nbsp;
@@ -47,7 +49,7 @@
 									</div>
 								</div>
 							</div>
-						</a>
+					<!--	</a>-->
 					</div>
 				</div>
 			 </div>

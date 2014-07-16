@@ -169,7 +169,7 @@ app.controller('RepositoriesController', function($scope,$http,$location,IPServi
 				console.log('Deleted Repo : '+repo);
 				$window.location.href = "#showRepositories?namespace="+$scope.namespace;
 				$route.reload();
-			}).error(function(data){alert('Unable to delete.')});;
+			}).error(function(data){});;
 	};
 });
 
@@ -191,6 +191,17 @@ app.controller('ImagesController', function($scope,$http,$location,IPService,$wi
 				$window.location.href = "#showImages?namespace="+$scope.namespace+"&repository="+$scope.repository;
 				$route.reload();
 			}).error(function(data){alert('Unable to delete.')});;
+	};
+	deleteRepoURL='http://'+$scope.IP+'/v1/repositories/'+$scope.namespace+'/'+ $scope.repository;
+	$scope.deleteRepo = function ()
+	{
+			
+			$http.delete(deleteRepoURL+'/').success(function (data)
+			{
+				console.log('Deleted Repo : '+$scope.repository);
+				$window.location.href = "#showRepositories?namespace="+$scope.namespace;
+				$route.reload();
+			}).error(function(data){});;
 	};
 	
 	/*This function gets 2 parameters the old tag before editand the new tag after edit.
