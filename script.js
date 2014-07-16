@@ -137,7 +137,7 @@ app.controller('NamespacesReposController', function($rootScope,$scope,$http,IPS
 });
 
 //Show repositories controller, all JS code for showRepositories page is here
-app.controller('RepositoriesController', function($scope,$http,$location,IPService,$window,$cookies) {
+app.controller('RepositoriesController', function($scope,$http,$location,IPService,$window,$cookies,$route) {
 	//$scope.IP=IPService.getIP();
 	$scope.IP=$cookies.IP;
 	$scope.namespace=$location.search()['namespace'];
@@ -160,6 +160,17 @@ app.controller('RepositoriesController', function($scope,$http,$location,IPServi
 			}
 		});		
 	}).error(function(data){alert('Unable to request.')});
+	deleteRepoURL='http://'+$scope.IP+'/v1/repositories/'+$scope.namespace;
+	$scope.deleteRepo = function (repo)
+	{
+			
+			$http.delete(deleteRepoURL+'/'+repo +'/').success(function (data)
+			{
+				console.log('Deleted Repo : '+repo);
+				$window.location.href = "#showRepositories?namespace="+$scope.namespace;
+				$route.reload();
+			}).error(function(data){alert('Unable to delete.')});;
+	};
 });
 
 //Show images controller, all JS code for showImages page is here
