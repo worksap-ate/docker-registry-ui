@@ -169,12 +169,13 @@ app.controller('ImagesController', function($scope,$http,$location,IPService,$wi
 		console.log('new tag is '+ newTag);
 		$http({method: 'GET', url: $scope.URL2 }).success(function(data)
 		{
-			
-			$scope.imageID=data.replace(/"/g,'');
+			//console.log('Data fetched : '+data);
+			//$scope.imageID=data.replace(/"/g,'');
+			$scope.imageID=data;
 			alert("the imageID is " + $scope.imageID);		
 		}).error(function(data){console.log('Unable to get image ID for tag')});
 		
-		$http({method: 'PUT', url: $scope.URL3, data:'\"'+$scope.imageID+'\"' , headers: {"Content-Type": "application/json","Accept": "application/json"}}).success(function(data)
+		$http({method: 'PUT', url: $scope.URL3, data:$scope.imageID , headers: {"Content-Type": "application/json","Accept": "application/json"}}).success(function(data)
 		{
 			alert("Success ");		
 		}).error(function(data){console.log('Unable to set tag for imageID')});
@@ -191,10 +192,13 @@ app.controller('ImagesController', function($scope,$http,$location,IPService,$wi
 	$http({method: 'GET', url: URL }).success(function(data)
 	{
 		$scope.results=data;
+		numTags=0;
 		angular.forEach($scope.results,function(key,value)
 		{
+			numTags++;
 			temp={};
 			temp['name']=value;
+			temp['id']=numTags;
 			$scope.tagsList.push(temp);
 		});		
 	}).error(function(data){alert('Unable to request.')});

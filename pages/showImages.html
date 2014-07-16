@@ -59,7 +59,7 @@
 								</div>
 								<div class="col-lg-1">
 									<!--	<button type="button" class="btn btn-outline btn-danger" ng-click="deleteTag(tag.name)">Delete</button> -->
-										<button type="button" class="btn btn-warning btn-circle" ng-click="deleteTag(tag.name)"><i class="fa fa-times"></i></button>
+									<button type="button" class="btn btn-warning btn-circle" ng-click="deleteTag(tag.name)"><i class="fa fa-times"></i></button>
 								</div>
 								<div class="col-lg-1">
 									<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#tagModal" >Edit Tag</button>
@@ -74,8 +74,8 @@
 												<div class="modal-body">
 													<form role="form" >
 														<div class="form-group">
-															<label>Enter IP address</label>
-															<input class="form-control" placeholder={{tag.name}} ng-model="newTag">
+															<label>Tag Name:</label>
+															<input type="text" class="form-control" placeholder={{tag.name}} ng-model="newTag">
 														</div>
 													</form>
 												</div>
