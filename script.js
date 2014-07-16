@@ -1,5 +1,5 @@
 // Create the module and name it app
-var app = angular.module('DockerWebUI', ['ngRoute']);
+var app = angular.module('DockerWebUI', ['ngCookies','ngRoute']);
 
 /*
  *This config command configures all $http requests to be send with 'X-Requested-With' header 
@@ -58,22 +58,29 @@ app.service('IPService', function () {
 });
 
 // create the Main controller (for index.html) and inject Angular's $scope
-app.controller('MainController', function($scope,IPService,$route,$window) {
+app.controller('MainController', ['$scope','IPService','$route','$window','$cookies',function($scope,IPService,$route,$window,$cookies) {
 	// create a message to display in our view
 	$scope.inputIP='';
-	$scope.setIP=function(inputIP)
+	//$cookies.IP='localhost';
+	//$scope.cookieIP=$cookies.IP;
+	//console.log('The cookiestore ip is' + $scope.cookieIP);
+	$scope.setIP=function(inputIP,$cookieStore)
 	{
 		IPService.setIP(inputIP);
+		$cookies.IP=inputIP;
+		//$cookieStore.put(‘IP’, inputIP);
 		console.log('the IP has been changed to '+IPService.getIP());
 		$window.location.href = "#showNamespaces";
 	}
-});
+}]);
 
 //Show Namespaces controller, all JS code for showNamespaces page is here
-app.controller('NamespacesController', function($rootScope,$scope,$http,IPService,$route) {
+app.controller('NamespacesController', function($rootScope,$scope,$http,IPService,$route,$cookies) {
 	
 	$scope.message = 'shownamespaces page';
-	$scope.IP=IPService.getIP();
+	//$scope.IP=IPService.getIP();
+	$scope.IP=$cookies.IP;
+	//$scope.IP=$cookieStore.get(‘ip’);
 	console.log('the ip is ' + $scope.IP);
 	$scope.num_results=0;
 	$scope.dictionary={};
@@ -107,8 +114,9 @@ app.controller('NamespacesController', function($rootScope,$scope,$http,IPServic
 });
 
 //Show repositories controller, all JS code for showRepositories page is here
-app.controller('RepositoriesController', function($scope,$http,$location,IPService,$window) {
-	$scope.IP=IPService.getIP();
+app.controller('RepositoriesController', function($scope,$http,$location,IPService,$window,$cookies) {
+	//$scope.IP=IPService.getIP();
+	$scope.IP=$cookies.IP;
 	$scope.namespace=$location.search()['namespace'];
 	$scope.num_results=0;
 	$scope.repositoriesList=[];
@@ -132,8 +140,9 @@ app.controller('RepositoriesController', function($scope,$http,$location,IPServi
 });
 
 //Show images controller, all JS code for showImages page is here
-app.controller('ImagesController', function($scope,$http,$location,IPService,$window) {
-	$scope.IP=IPService.getIP();
+app.controller('ImagesController', function($scope,$http,$location,IPService,$window,$cookies) {
+	//$scope.IP=IPService.getIP();
+	$scope.IP=$cookies.IP;
 	//$scope.newTag='';
 	$scope.namespace=$location.search()['namespace'];
 	$scope.repository=$location.search()['repository'];
