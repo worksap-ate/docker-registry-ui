@@ -131,9 +131,9 @@
             <div class="navbar-header">
                 <div class="panel-body">
 					<div class="input-group custom-search-form">
-						<input type="text" placeholder="Search..." class="form-control" id="queryAll" name="queryAll">
+						<input type="text" placeholder="Search..." class="form-control" id="queryAll" name="queryAll" onkeydown="if (event.keyCode == 13) document.getElementById('submit').click()">
 						<div class="input-group-btn">
-							<button class="btn btn-default" type="button" onclick="location.href='#showNamespacesRepos?queryAll='+document.getElementById('queryAll').value;">
+							<button class="btn btn-default" name="submit" id="submit" onclick="location.href='#showNamespacesRepos?queryAll='+document.getElementById('queryAll').value;">
                                     <i class="fa fa-search"></i>
                             </button>
                         </div>    
