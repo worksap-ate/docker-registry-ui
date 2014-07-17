@@ -74,11 +74,11 @@ app.controller('MainController', ['$scope','IPService','$route','$window','$cook
 	{
 		IPService.setIP(inputIP);
 		$cookies.IP=inputIP;
-		//$cookieStore.put(‘IP’, inputIP);
 		console.log('the IP has been changed to '+IPService.getIP());
 		$window.location.href = "#showNamespaces";
 		$route.reload();
 	}
+	$scope.IP=$scope.inputIP;
 }]);
 
 //Show Namespaces controller, all JS code for showNamespaces page is here
