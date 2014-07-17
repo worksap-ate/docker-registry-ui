@@ -48,23 +48,9 @@ app.config(function($routeProvider) {
 		});
 });
 
-/*This service is used to define the object which stores the current Docker-registry IP address and defines the getter and setter 
-  methods for accessing  and modifyingthe IP address. 
-*/
-app.service('IPService', function () {
-	var IP = '192.168.1.1';
-	return {
-		getIP: function () {
-			return IP;
-		},
-		setIP: function(value) {
-			IP = value;
-		}
-	};
-});
 
 // create the Main controller (for index.html) and inject Angular's $scope
-app.controller('MainController', ['$scope','IPService','$route','$window','$cookies',function($scope,IPService,$route,$window,$cookies) {
+app.controller('MainController', ['$scope','$route','$window','$cookies',function($scope,$route,$window,$cookies) {
 	// create a message to display in our view
 	$scope.inputIP='';
 	//$cookies.IP='localhost';
@@ -72,9 +58,8 @@ app.controller('MainController', ['$scope','IPService','$route','$window','$cook
 	//console.log('The cookiestore ip is' + $scope.cookieIP);
 	$scope.setIP=function(inputIP)
 	{
-		IPService.setIP(inputIP);
 		$cookies.IP=inputIP;
-		console.log('the IP has been changed to '+IPService.getIP());
+		console.log('the IP has been changed to '+$cookies.IP);
 		$window.location.href = "#showNamespaces";
 		$route.reload();
 	}
@@ -82,7 +67,7 @@ app.controller('MainController', ['$scope','IPService','$route','$window','$cook
 }]);
 
 //Show Namespaces controller, all JS code for showNamespaces page is here
-app.controller('NamespacesController', function($rootScope,$scope,$http,IPService,$route,$cookies) {
+app.controller('NamespacesController', function($rootScope,$scope,$http,$route,$cookies) {
 	
 	$scope.message = 'shownamespaces page';
 	//$scope.IP=IPService.getIP();
@@ -121,7 +106,7 @@ app.controller('NamespacesController', function($rootScope,$scope,$http,IPServic
 });
 
 //Show NamespacesRepos controller, all JS code for showNamespaces page is here
-app.controller('NamespacesReposController', function($rootScope,$scope,$http,IPService,$route,$cookies,$location) {
+app.controller('NamespacesReposController', function($rootScope,$scope,$http,$route,$cookies,$location) {
 	
 	$scope.queryAll=$location.search()['queryAll'];
 	if($scope.queryAll === undefined || $scope.queryAll === "")
@@ -157,7 +142,7 @@ app.controller('NamespacesReposController', function($rootScope,$scope,$http,IPS
 });
 
 //Show repositories controller, all JS code for showRepositories page is here
-app.controller('RepositoriesController', function($scope,$http,$location,IPService,$window,$cookies,$route) {
+app.controller('RepositoriesController', function($scope,$http,$location,$window,$cookies,$route) {
 	//$scope.IP=IPService.getIP();
 	$scope.IP=$cookies.IP;
 	$scope.namespace=$location.search()['namespace'];
@@ -194,7 +179,7 @@ app.controller('RepositoriesController', function($scope,$http,$location,IPServi
 });
 
 //Show images controller, all JS code for showImages page is here
-app.controller('ImagesController', function($scope,$http,$location,IPService,$window,$cookies,$route) {
+app.controller('ImagesController', function($scope,$http,$location,$window,$cookies,$route) {
 	//$scope.IP=IPService.getIP();
 	$scope.IP=$cookies.IP;
 	//$scope.newTag='';
