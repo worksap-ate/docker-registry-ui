@@ -160,12 +160,12 @@
 								<form role="form" >
 									<div class="form-group">
 										<label>Enter IP address</label>
-                                        <input class="form-control" placeholder="IP Address" ng-model="inputIP">
+                                        <input class="form-control" placeholder="IP Address" ng-model="inputIP"  onkeydown="if (event.keyCode == 13) document.getElementById('setIP').click()">
                                     </div>
 								</form>
 							</div>
 							<div class="modal-footer">
-								<center><button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" ng-click="setIP(inputIP)" >Confirm</button></center>
+								<center><button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="setIP" ng-click="setIP(inputIP)" >Confirm</button></center>
 							</div>
 						</div>
 						<!-- /.modal-content -->
