@@ -52,14 +52,19 @@ app.config(function($routeProvider) {
 // create the Main controller (for index.html) and inject Angular's $scope
 app.controller('MainController', ['$scope','$route','$window','$cookies',function($scope,$route,$window,$cookies) {
 	$scope.inputIP='';
-	$scope.setIP=function(inputIP)
+	$scope.getIP=function()
 	{
-		$cookies.IP=inputIP;
+		$scope.inputIP=$cookies.IP;
+		console.log('the current IP has been to '+$cookies.IP);
+	}
+	$scope.setIP=function()
+	{
+		$cookies.IP=$scope.inputIP;
 		console.log('the IP has been changed to '+$cookies.IP);
 		$window.location.href = "#showNamespaces";
 		$route.reload();
 	}
-	$scope.IP=$scope.inputIP;
+	//$scope.IP=$scope.inputIP;
 	if($cookies.IP!==undefined)
 	{
 		$window.location.href="#showNamespaces";
