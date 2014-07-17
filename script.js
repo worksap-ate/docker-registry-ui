@@ -121,19 +121,39 @@ app.controller('NamespacesController', function($rootScope,$scope,$http,IPServic
 });
 
 //Show NamespacesRepos controller, all JS code for showNamespaces page is here
-app.controller('NamespacesReposController', function($rootScope,$scope,$http,IPService,$route,$cookies) {
+app.controller('NamespacesReposController', function($rootScope,$scope,$http,IPService,$route,$cookies,$location) {
 	
-	$scope.message = 'shownamespaces page';
-	$scope.IP=$cookies.IP;
-	console.log('the ip is ' + $scope.IP);
-	$scope.num_results=0;
-	$scope.namespacesReposList=[];
-	$http({method: 'GET', url: 'http://'+$scope.IP+'/v1/search'}).success(function(data)
+	$scope.queryAll=$location.search()['queryAll'];
+	if($scope.queryAll === undefined || $scope.queryAll === "")
 	{
-		$scope.num_results=data.num_results;
-		$scope.namespacesReposList=data.results;
-	}).error(function(data){alert('Unable to reuest.')});
-
+		$scope.IP=$cookies.IP;
+		console.log('the ip is ' + $scope.IP);
+		$scope.num_results=0;
+		$scope.namespacesReposList=[];
+		$http({method: 'GET', url: 'http://'+$scope.IP+'/v1/search'}).success(function(data)
+		{
+			$scope.num_results=data.num_results;
+			$scope.namespacesReposList=data.results;
+		}).error(function(data){alert('Unable to request.')});
+	}
+	else
+	{
+		$scope.IP=$cookies.IP;
+		console.log('the ip is ' + $scope.IP);
+		$scope.num_results=0;
+		$scope.namespacesReposList=[];
+		$http({method: 'GET', url: 'http://'+$scope.IP+'/v1/search'}).success(function(data)
+		{
+			$scope.num_results=data.num_results;
+			angular.forEach(data.results,function(result)
+			{
+				$scope.queryAll = angular.lowercase($scope.queryAll);
+				if( result.name.indexOf($scope.queryAll) >= 0 )
+					$scope.namespacesReposList.push(result);
+			});
+		}).error(function(data){alert('Unable to request.')});
+		
+	}
 });
 
 //Show repositories controller, all JS code for showRepositories page is here

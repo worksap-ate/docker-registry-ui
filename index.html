@@ -117,6 +117,7 @@
 
 <div id="wrapper">
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+			<div class="col-lg-1">
             <div class="navbar-header">
                 <div class="panel-body">
 					<a href="#showNamespaces">			
@@ -124,22 +125,24 @@
 					</a>
 				</div>
             </div>
+            </div>
             <!-- /.navbar-header -->
           	<div class="col-lg-2">
             <div class="navbar-header">
                 <div class="panel-body">
 					<div class="input-group custom-search-form">
-						<input type="text" placeholder="Search..." class="form-control" ng-model="queryAll">
+						<input type="text" placeholder="Search..." class="form-control" id="queryAll" name="queryAll">
 						<div class="input-group-btn">
-							<button class="btn btn-default" type="button">
+							<button class="btn btn-default" type="button" onclick="location.href='#showNamespacesRepos?queryAll='+document.getElementById('queryAll').value;">
                                     <i class="fa fa-search"></i>
                             </button>
                         </div>    
                         </div>
-					</div>						
+					</div>					
 				</div>
             </div>
 		<ul class="nav navbar-top-links navbar-right">
+			<div class="col-lg-2">
 			<div class="panel-body">
 				<!-- Button trigger modal -->
 				<button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
@@ -172,7 +175,7 @@
 				<!-- /.modal -->
 			</div>
             <!-- .panel-body -->
-				
+			</div>	
         
 		</ul>
         </nav>
