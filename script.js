@@ -244,17 +244,23 @@ app.controller('ImagesController', function($scope,$http,$location,IPService,$wi
 			{
 				console.log('Data fetched : '+data);
 				imageId='\"'+data.replace(/"/g,'')+'\"';
-				$http.delete($scope.oldTagURL).success(function (data)
+				if(oldTag !== newTag)
 				{
 					$http({method: 'PUT', url: $scope.newTagURL, data: imageId , headers: {"Content-Type": "application/json","Accept": "application/json"}}).success(function(data)
 					{
-						$window.location.href = "#showImages?namespace="+$scope.namespace+"&repository="+$scope.repository;
-						$route.reload();	
+						$http.delete($scope.oldTagURL).success(function (data)
+						{
+							$window.location.href = "#showImages?namespace="+$scope.namespace+"&repository="+$scope.repository;
+							$route.reload();
+						}).error(function(data){alert('Unable to delete.')});		
 					}).error(function(data){
 					console.log('Unable to set tag for imageID');
 					});
-					
-				}).error(function(data){alert('Unable to delete.')});
+				}
+				else
+				{
+					console.log('OldTag same as newTag ,no action taken');
+				}
 						
 			}).error(function(data){console.log('Unable to get image ID for tag')});
 		
