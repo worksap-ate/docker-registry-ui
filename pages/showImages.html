@@ -87,13 +87,13 @@
 													<form role="form" >
 														<div class="form-group">
 															<label>Tag Name:</label>
-															<input type="text" contentEditable=true class="form-control" placeholder={{tag.name}} ng-model="newTag">
+															<input type="text" contentEditable=true class="form-control" placeholder={{tag.name}} ng-model="newTag" onkeydown="if (event.keyCode == 13) document.getElementById('setTag').click()">
 														</div>
 													</form>
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-													<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="changeTag(tag.name,newTag)">Save changes</button>
+													<button type="button" class="btn btn-primary" data-dismiss="modal" id ="setTag"ng-click="changeTag(tag.name,newTag)">Save changes</button>
 												</div>
 											</div>
 											<!-- /.modal-content -->
