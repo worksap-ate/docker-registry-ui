@@ -202,6 +202,12 @@ app.controller('ImagesController', function($scope,$http,$location,IPService,$wi
 	$scope.repository=$location.search()['repository'];
 	$scope.tagsList=[];
 	URL='http://'+$scope.IP+'/v1/repositories/'+$scope.namespace+'/'+$scope.repository+'/tags';
+	
+	$scope.setNewTag = function (nTag)
+	{
+		$scope.newTag=nTag;
+	}
+	
 	$scope.deleteTag = function (tag)
 	{
 			
