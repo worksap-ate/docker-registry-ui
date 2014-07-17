@@ -1,10 +1,12 @@
 // Create the module and name it app
-var app = angular.module('DockerWebUI', ['ngCookies','ngRoute']);
+var app = angular.module('DockerWebUI', ['ngCookies','ngRoute','ngClipboard']);
 
 /*
  *This config command configures all $http requests to be send with 'X-Requested-With' header 
  * which is required by docker-registry flask server
- */  
+ */ 
+app.config(['ngClipProvider', function(ngClipProvider) { ngClipProvider.setPath("includes/bower_components/zeroclipboard/dist/ZeroClipboard.swf"); }]);
+     
 app.config(function($httpProvider){
 	delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
@@ -50,37 +52,7 @@ app.config(function($routeProvider) {
 
 
 // create the Main controller (for index.html) and inject Angular's $scope
-app.controller('MainController', ['$scope','$route','$window','$cookies','$location',function($scope,$route,$window,$cookies,$location) {
-	
-	function ValidateIPaddress(inputText)
-	{
-		var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-		if(inputText.match(ipformat))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
-	$scope.paramIP=$location.search()['IP'];
-	if($scope.paramIP!==undefined)
-	{
-		if(ValidateIPaddress($scope.paramIP)===true)
-		{
-			$cookies.IP=$scope.paramIP;
-			console.log('the IP has been changed to '+$cookies.IP);
-			$window.location.href = "#showNamespaces";
-			$route.reload();
-		}
-		else
-		{
-			alert('Invalid IP');
-		}
-	}
-	
+app.controller('MainController', ['$scope','$route','$window','$cookies',function($scope,$route,$window,$cookies) {
 	$scope.inputIP='';
 	$scope.getIP=function()
 	{
@@ -94,6 +66,7 @@ app.controller('MainController', ['$scope','$route','$window','$cookies','$locat
 		$window.location.href = "#showNamespaces";
 		$route.reload();
 	}
+	//$scope.IP=$scope.inputIP;
 	if($cookies.IP!==undefined)
 	{
 		$window.location.href="#showNamespaces";
@@ -246,6 +219,14 @@ app.controller('ImagesController', function($scope,$http,$location,$window,$cook
 		$scope.repository=$location.search()['repository'];
 		$scope.tagsList=[];
 		URL='http://'+$scope.IP+'/v1/repositories/'+$scope.namespace+'/'+$scope.repository+'/tags';
+		
+		 $scope.getTextToCopy = function(tag_name) {
+			return "docker pull "+$scope.IP+"/"+$scope.namespace+"/"+$scope.repository+":"+tag_name;
+		}
+		
+		$scope.doSomething = function () {
+			console.log("Text copied");
+		}
 		
 		$scope.setNewTag = function (nTag)
 		{
