@@ -51,7 +51,6 @@ app.config(function($routeProvider) {
 
 // create the Main controller (for index.html) and inject Angular's $scope
 app.controller('MainController', ['$scope','$route','$window','$cookies',function($scope,$route,$window,$cookies) {
-	// create a message to display in our view
 	$scope.inputIP='';
 	$scope.setIP=function(inputIP)
 	{
@@ -61,6 +60,11 @@ app.controller('MainController', ['$scope','$route','$window','$cookies',functio
 		$route.reload();
 	}
 	$scope.IP=$scope.inputIP;
+	if($cookies.IP!==undefined)
+	{
+		$window.location.href="#showNamespaces";
+		$route.reload();
+	}
 }]);
 
 //Show Namespaces controller, all JS code for showNamespaces page is here
