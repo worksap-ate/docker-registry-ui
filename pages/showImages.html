@@ -62,8 +62,9 @@
 									<h4>{{tag.name}}</h4>
 								</div>
 								<div class="col-lg-1">
-									<!--	<button type="button" class="btn btn-outline btn-danger" ng-click="deleteTag(tag.name)">Delete</button> -->
-									<button type="button" class="btn btn-warning btn-circle" ng-click="deleteTag(tag.name)"><i class="fa fa-times"></i></button>
+									<div ng-if="tag.name!='latest'">							
+										<button type="button" class="btn btn-warning btn-circle" ng-click="deleteTag(tag.name)"><i class="fa fa-times"></i></button>
+									</div>	
 								</div>
 								<div class="col-lg-1">
 										
