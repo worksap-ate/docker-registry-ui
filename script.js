@@ -52,7 +52,36 @@ app.config(function($routeProvider) {
 
 
 // create the Main controller (for index.html) and inject Angular's $scope
-app.controller('MainController', ['$scope','$route','$window','$cookies',function($scope,$route,$window,$cookies,$location) {
+app.controller('MainController', ['$scope','$route','$window','$cookies','$location',function($scope,$route,$window,$cookies,$location) {
+	
+	function ValidateIPaddress(inputText)
+	{
+		var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+		if(inputText.match(ipformat))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	$scope.paramIP=$location.search()['IP'];
+	if($scope.paramIP!==undefined)
+	{
+		if(ValidateIPaddress($scope.paramIP)===true)
+		{
+			$cookies.IP=$scope.paramIP;
+			console.log('the IP has been changed to '+$cookies.IP);
+			$window.location.href = "#showNamespaces";
+			$route.reload();
+		}
+		else
+		{
+			alert('Invalid IP');
+		}
+	}
+	
 	$scope.inputIP='';
 	$scope.getIP=function()
 	{
