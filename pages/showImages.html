@@ -1,10 +1,18 @@
+<script>
+	function MethodonFirstPage()
+	{
+		alert('ABRA KA DABRA');
+	}
+	
+</script>
+
 <div class="row">
 	<div class="col-lg-4">
 		<div class="row">
 			<div class="col-lg-1">
 			</div>
 			<div class="col-lg-5">
-				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#repoDelete" ng-click="">Delete Repository</button>
+				<button type="button" id="deleteRepo" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#repoDelete" ng-click="">Delete Repository</button>
 				<div class="modal fade" id="repoDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -16,7 +24,7 @@
 								<center>
 								<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button type="button" class="btn btn-primary" data-dismiss="modal" id ="setTag" ng-click="deleteRepo()">YES</button>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" id="setTag" ng-click="deleteRepo()">YES</button>
 								</center>
 							</div>
 						</div>
@@ -95,7 +103,7 @@
 														<center>
 														<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
 														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-														<button type="button" class="btn btn-primary" data-dismiss="modal" id ="setTag" ng-click="deleteTag(tag.name)">YES</button>
+														<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="deleteTag(tag.name)">YES</button>
 														</center>
 													</div>
 												</div>
@@ -131,7 +139,7 @@
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-													<button type="button" class="btn btn-primary" data-dismiss="modal" id ="setTag"ng-click="changeTag(tag.name,newTag)">Save changes</button>
+													<button type="button" class="btn btn-primary" data-dismiss="modal" id ="setTag" ng-click="changeTag(tag.name,newTag)">Save changes</button>
 												</div>
 											</div>
 											<!-- /.modal-content -->
