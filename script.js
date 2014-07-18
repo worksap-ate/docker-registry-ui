@@ -67,10 +67,11 @@ app.controller('MainController', ['$scope','$route','$window','$cookies',functio
 		$route.reload();
 	}
 	
-	//alert("$window.location is " + $window.location);
-	
-	//$scope.IP=$scope.inputIP;
-	
+	/*This function is used to solve issue #53.
+	 * It checks if the current page is home and ip is set, it redirects to all namespaces.
+	 * Otherwise nothing happens.
+	 * NOTE: this code does get executed each time page is refreshed.
+	 */ 
 	if($cookies.IP!==undefined)
 	{
 		if($window.location == "http://localhost:8000/#/")
