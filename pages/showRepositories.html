@@ -44,10 +44,9 @@
 									<center><h3>{{repository.name}}</h3></center>
 									
 									<div class="titleBox">
-										Delete Repo 
-										&nbsp; &nbsp;
-										<script>function h(){var newWin = window.open('#showImages?namespace={{namespace}}&repository=+{{repository.name}}');newWin.document.getElementById('deleteRepo').click();}</script>
-										<button type="button" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#repoDelete{{repository.id}}" onclick="h()"><i class="fa fa-times"></i></button>
+										{{repository.name}} 
+										<!--&nbsp; &nbsp;
+										<button type="button" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#repoDelete{{repository.id}}" onclick="alert(':(')"><i class="fa fa-times"></i></button>
 										<div class="modal fade" id="repoDelete{{repository.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 											<div class="modal-dialog">
 												<div class="modal-content">
@@ -59,18 +58,15 @@
 														<center>
 														<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
 														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-														<button type="button" class="btn btn-primary" data-dismiss="modal" id ="setTag" ng-click="deleteRepo(repository.name)">YES</button>
+														<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="deleteRepo(repository.name)">YES</button>
 														</center>
 													</div>
 												</div>
-												<!-- /.modal-content -->
 											</div>
-											<!-- /.modal-dialog -->
 										</div>
 										<!-- /.modal -->
 									</div>
 								</div>
-								</link>
 							</div>
 						</a>
 					</div>
