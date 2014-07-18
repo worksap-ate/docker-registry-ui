@@ -52,7 +52,7 @@ app.config(function($routeProvider) {
 
 
 // create the Main controller (for index.html) and inject Angular's $scope
-app.controller('MainController', ['$scope','$route','$window','$cookies',function($scope,$route,$window,$cookies) {
+app.controller('MainController', ['$scope','$route','$window','$cookies',function($scope,$route,$window,$cookies,$location) {
 	$scope.inputIP='';
 	$scope.getIP=function()
 	{
@@ -67,19 +67,24 @@ app.controller('MainController', ['$scope','$route','$window','$cookies',functio
 		$route.reload();
 	}
 	
-	//Code used to solve issue #53.
+	//alert("$window.location is " + $window.location);
 	
 	//$scope.IP=$scope.inputIP;
-	/*if($cookies.IP!==undefined)
+	
+	if($cookies.IP!==undefined)
 	{
-		$window.location.href="#showNamespaces";
-		$route.reload();
-	}*/
+		if($window.location == "http://localhost:8000/#/")
+		{
+			$window.location.href="#showNamespaces";
+			$route.reload();
+		}
+	}
 }]);
 
 //Show Namespaces controller, all JS code for showNamespaces page is here
-app.controller('NamespacesController', function($rootScope,$scope,$http,$route,$cookies,$window) {
+app.controller('NamespacesController', function($rootScope,$scope,$http,$route,$cookies,$window,$location) {
 	
+	//alert("location is " + $location.path());
 	$scope.IP=$cookies.IP;
 	if($scope.IP===undefined)
 	{
@@ -121,6 +126,7 @@ app.controller('NamespacesController', function($rootScope,$scope,$http,$route,$
 //Show NamespacesRepos controller, all JS code for showNamespaces page is here
 app.controller('NamespacesReposController', function($rootScope,$scope,$http,$route,$cookies,$location,$window) {
 	
+	//alert("location is " + $location);
 	$scope.IP=$cookies.IP;
 	if($scope.IP===undefined)
 	{
@@ -165,6 +171,7 @@ app.controller('NamespacesReposController', function($rootScope,$scope,$http,$ro
 
 //Show repositories controller, all JS code for showRepositories page is here
 app.controller('RepositoriesController', function($scope,$http,$location,$window,$cookies,$route) {
+	//alert("location is " + $location);
 	$scope.IP=$cookies.IP;
 	if($scope.IP===undefined)
 	{
@@ -210,6 +217,7 @@ app.controller('RepositoriesController', function($scope,$http,$location,$window
 //Show images controller, all JS code for showImages page is here
 app.controller('ImagesController', function($scope,$http,$location,$window,$cookies,$route) {
 	
+	//alert("window.location is " + $window.location);
 	$scope.IP=$cookies.IP;
 	if($scope.IP===undefined)
 	{
