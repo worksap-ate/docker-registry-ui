@@ -46,7 +46,8 @@
 									<div class="titleBox">
 										Delete Repo 
 										&nbsp; &nbsp;
-										<button type="button" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#repoDelete{{repository.id}}" ng-click="#repoDelete{{repository.id}}"><i class="fa fa-times"></i></button>
+										<script>function h(){var newWin = window.open('#showImages?namespace={{namespace}}&repository=+{{repository.name}}');newWin.document.getElementById('deleteRepo').click();}</script>
+										<button type="button" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#repoDelete{{repository.id}}" onclick="h()"><i class="fa fa-times"></i></button>
 										<div class="modal fade" id="repoDelete{{repository.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 											<div class="modal-dialog">
 												<div class="modal-content">
