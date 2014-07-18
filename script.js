@@ -67,7 +67,7 @@ app.controller('MainController', ['$scope','$route','$window','$cookies',functio
 		$route.reload();
 	}
 	
-	//Code used to solve issue #53
+	//Code used to solve issue #53.
 	
 	//$scope.IP=$scope.inputIP;
 	/*if($cookies.IP!==undefined)
