@@ -36,8 +36,9 @@
 			<div class="wrap">
 				<div id='content'>
 					<div  ng-repeat="repository in repositoriesList | filter:queryRepository | orderBy:orderProp" or>	
-				<a href="#showImages?namespace={{namespace}}&repository={{repository.name}}">
+						<a ng-href="#showImages?namespace={{namespace}}&repository={{repository.name}}">
 							<div class="box">
+								<link rel="import" href="google.com">
 								<div class="boxInner">
 									
 									<center><h3>{{repository.name}}</h3></center>
@@ -45,9 +46,30 @@
 									<div class="titleBox">
 										Delete Repo 
 										&nbsp; &nbsp;
-										<button type="button" class="btn btn-warning btn-circle" ng-click="deleteRepo(repository.name)"><i class="fa fa-times"></i></button>
+										<button type="button" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#repoDelete{{repository.id}}" ng-click="#repoDelete{{repository.id}}"><i class="fa fa-times"></i></button>
+										<div class="modal fade" id="repoDelete{{repository.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+														<h4 class="modal-title" id="myModalLabel">Confirm Delete Repository</h4>
+													</div>
+													<div class="modal-body">
+														<center>
+														<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<button type="button" class="btn btn-primary" data-dismiss="modal" id ="setTag" ng-click="deleteRepo(repository.name)">YES</button>
+														</center>
+													</div>
+												</div>
+												<!-- /.modal-content -->
+											</div>
+											<!-- /.modal-dialog -->
+										</div>
+										<!-- /.modal -->
 									</div>
 								</div>
+								</link>
 							</div>
 						</a>
 					</div>

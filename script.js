@@ -220,12 +220,15 @@ app.controller('RepositoriesController', function($scope,$http,$location,$window
 		{
 			$scope.num_results=data.num_results;
 			results=data.results;
+			numRepos=0;
 			angular.forEach(results,function(result)
 			{
 				if(result.name.split('/')[0]===$scope.namespace)
 				{
 					temp={};
+					numRepos++;
 					temp['name']=result.name.split('/')[1];
+					temp['id']=numRepos;
 					$scope.repositoriesList.push(temp);
 				}
 			});		
