@@ -111,7 +111,7 @@
 												
 								</div>
 								<div class="col-lg-1">
-									
+									<div ng-if="tag.name!='latest'">
 									<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#tagModal{{tag.id}}" ng-click="setNewTag(tag.name)">Edit Tag</button>
 									<!-- Modal -->
 									<div class="modal fade" id="tagModal{{tag.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -139,6 +139,7 @@
 										<!-- /.modal-dialog -->
 									</div>
 									<!-- /.modal -->
+									</div>
 								
 								</div>		
 										 
