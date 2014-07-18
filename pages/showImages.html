@@ -63,7 +63,27 @@
 								</div>
 								<div class="col-lg-1">
 									<div ng-if="tag.name!='latest'">							
-										<button type="button" class="btn btn-warning btn-circle" ng-click="deleteTag(tag.name)"><i class="fa fa-times"></i></button>
+										<button type="button" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#tagDelete{{tag.id}}" ng-click=""><i class="fa fa-times"></i></button>
+											<div class="modal fade" id="tagDelete{{tag.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+														<h4 class="modal-title" id="myModalLabel">Confirm Delete Tag</h4>
+													</div>
+													<div class="modal-body">
+														<center>
+														<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<button type="button" class="btn btn-primary" data-dismiss="modal" id ="setTag" ng-click="deleteTag(tag.name)">YES</button>
+														</center>
+													</div>
+												</div>
+												<!-- /.modal-content -->
+											</div>
+											<!-- /.modal-dialog -->
+										</div>
+										<!-- /.modal -->
 									</div>	
 								</div>
 								<div class="col-lg-1">
