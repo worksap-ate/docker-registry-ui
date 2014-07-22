@@ -1,6 +1,6 @@
 # Docker Registry UI
 
-This projecct provides a web UI for [docker-registry](https://github.com/dotcloud/docker-registry)/.
+This projecct provides a web UI for [docker-registry](https://github.com/dotcloud/docker-registry).
 
 #### How to Use
 
