@@ -11,18 +11,19 @@ We already deploy it to [github pages](http://worksap-ate.github.io/docker-regis
 
 #### Features
 
-  1. Toggle button
-    * If user wants to see all the images he can do that by using the toggle button to change the view.
+  1. Show all repositories.
+    * application shows all namespace by default. Click the "Toggle" button shows all repository. 
   1. Search like docker hub
     * If user wants to search in the entire hub just like the docker hub, then he can use the search option given at the top. The phrase he wants to search for will search in the entire hub.
-  1. Filter
-    * User can filter at any web page to decrease the list by filtering them by some phrase which he can enter in the box.
+  1. Filter by word
   1. Manage Tags
-    * User can manage the tags, that is he can edit the name of the tag, delete a tag and also copy the command to pull that image. He can also delete the entire repository if he wants.
+    * rename
+    * delete
+    * copy the pull command to clipboard.
   1. Change Registry
     * He can change the registry IP whenever he wants by using the change registry option at the top.
   1. Sort
     * User can use the sort option to sort the items accorsing to the alphabetical order whether it is ascending or decending.
-  1. docker-registry IP can set through GET parameter
-    * User can input the IP as a GET parameter in the URl like : http://worksap-ate.github.io/docker-registry-ui/#/?IP=xxx.xxx.xxx.xxx
-This way user can also bookmark the registry directly and can visit anytime.    
+  1. Registry can be set through query parameter
+    * User can input the regitsty IP as a query parameter like : http://worksap-ate.github.io/docker-registry-ui/#/?IP=xxx.xxx.xxx.xxx
+      This way user can bookmark the registry directly.    
