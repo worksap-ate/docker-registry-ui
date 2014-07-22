@@ -1,59 +1,32 @@
-// Create the module and name it app
 var app = angular.module('DockerWebUI', ['ngCookies','ngRoute','ngClipboard']);
-
-/*
- *This config command configures all $http requests to be send with 'X-Requested-With' header 
- * which is required by docker-registry flask server
- */ 
 app.config(['ngClipProvider', function(ngClipProvider) { ngClipProvider.setPath("includes/bower_components/zeroclipboard/dist/ZeroClipboard.swf"); }]);
-     
 app.config(function($httpProvider){
 	delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
-
-// configure our routes.
-/*
- *Using routes we create a single page application(SPA), with index.html as the base template and then loading
- *various views using ng-view, and anchor tags. 
- */ 
 app.config(function($routeProvider) {
 	$routeProvider
-
-		// route for the home page
 		.when('/', {
 			templateUrl : 'pages/home.html',
 			controller  : 'MainController'
 		})
-
-		// route for the showNamespaces page
 		.when('/showNamespaces', {
 			templateUrl : 'pages/showNamespaces.html',
 			controller  : 'NamespacesController'
 		})
-		
-		// route for the showNamespacesRepos page
 		.when('/showNamespacesRepos', {
 			templateUrl : 'pages/showNamespacesRepos.html',
 			controller  : 'NamespacesReposController'
 		})
-
-		// route for the showRepositories page
 		.when('/showRepositories', {
 			templateUrl : 'pages/showRepositories.html',
 			controller  : 'RepositoriesController'
 		})
-		
-		// route for the showImages page
 		.when('/showImages', {
 			templateUrl : 'pages/showImages.html',
 			controller  : 'ImagesController'
 		});
 });
-
-
-// create the Main controller (for index.html) and inject Angular's $scope
 app.controller('MainController', ['$scope','$route','$window','$cookies','$location',function($scope,$route,$window,$cookies,$location) {
-	
 	function ValidateIPaddress(inputText)
 	{
 		var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
@@ -81,7 +54,6 @@ app.controller('MainController', ['$scope','$route','$window','$cookies','$locat
 			alert('Invalid IP');
 		}
 	}
-	
 	$scope.inputIP='';
 	$scope.getIP=function()
 	{
@@ -95,12 +67,6 @@ app.controller('MainController', ['$scope','$route','$window','$cookies','$locat
 		$window.location.href = "#showNamespaces";
 		$route.reload();
 	}
-	
-	/*This function is used to solve issue #53.
-	 * It checks if the current page is home and ip is set, it redirects to all namespaces.
-	 * Otherwise nothing happens.
-	 * NOTE: this code does get executed each time page is refreshed.
-	 */ 
 	if($cookies.IP!==undefined)
 	{
 		if($window.location == "http://localhost:8000/#/")
@@ -110,11 +76,7 @@ app.controller('MainController', ['$scope','$route','$window','$cookies','$locat
 		}
 	}
 }]);
-
-//Show Namespaces controller, all JS code for showNamespaces page is here
 app.controller('NamespacesController', function($rootScope,$scope,$http,$route,$cookies,$window,$location) {
-	
-	//alert("location is " + $location.path());
 	$scope.IP=$cookies.IP;
 	if($scope.IP===undefined)
 	{
@@ -128,7 +90,6 @@ app.controller('NamespacesController', function($rootScope,$scope,$http,$route,$
 		$scope.dictionary={};
 		$scope.namespacesList=[];
 		results=[];
-		
 		$http({method: 'GET', url: 'http://'+$scope.IP+'/v1/search'}).success(function(data)
 		{
 			$scope.num_results=data.num_results;
@@ -139,8 +100,6 @@ app.controller('NamespacesController', function($rootScope,$scope,$http,$route,$
 			});
 			angular.forEach(results,function(result)
 			{
-				//namespaces.push(result.name.split('/')[0]);
-				//images.push(result.name.split('/')[1]);
 				$scope.dictionary[result.name.split('/')[0]].push(result.name.split('/')[1]);
 			});	
 			angular.forEach($scope.dictionary,function(key,value)
@@ -152,11 +111,7 @@ app.controller('NamespacesController', function($rootScope,$scope,$http,$route,$
 		}).error(function(data){alert('Unable to reuest.')});
 	}
 });
-
-//Show NamespacesRepos controller, all JS code for showNamespaces page is here
 app.controller('NamespacesReposController', function($rootScope,$scope,$http,$route,$cookies,$location,$window) {
-	
-	//alert("location is " + $location);
 	$scope.IP=$cookies.IP;
 	if($scope.IP===undefined)
 	{
@@ -194,14 +149,10 @@ app.controller('NamespacesReposController', function($rootScope,$scope,$http,$ro
 						$scope.namespacesReposList.push(result);
 				});
 			}).error(function(data){alert('Unable to request.')});
-			
 		}
 	}
 });
-
-//Show repositories controller, all JS code for showRepositories page is here
 app.controller('RepositoriesController', function($scope,$http,$location,$window,$cookies,$route) {
-	//alert("location is " + $location);
 	$scope.IP=$cookies.IP;
 	if($scope.IP===undefined)
 	{
@@ -236,7 +187,6 @@ app.controller('RepositoriesController', function($scope,$http,$location,$window
 		deleteRepoURL='http://'+$scope.IP+'/v1/repositories/'+$scope.namespace;
 		$scope.deleteRepo = function (repo)
 		{
-				
 				$http.delete(deleteRepoURL+'/'+repo +'/').success(function (data)
 				{
 					console.log('Deleted Repo : '+repo);
@@ -246,11 +196,7 @@ app.controller('RepositoriesController', function($scope,$http,$location,$window
 		};
 	}
 });
-
-//Show images controller, all JS code for showImages page is here
 app.controller('ImagesController', function($scope,$http,$location,$window,$cookies,$route) {
-	
-	//alert("window.location is " + $window.location);
 	$scope.IP=$cookies.IP;
 	if($scope.IP===undefined)
 	{
@@ -263,23 +209,18 @@ app.controller('ImagesController', function($scope,$http,$location,$window,$cook
 		$scope.repository=$location.search()['repository'];
 		$scope.tagsList=[];
 		URL='http://'+$scope.IP+'/v1/repositories/'+$scope.namespace+'/'+$scope.repository+'/tags';
-		
 		 $scope.getTextToCopy = function(tag_name) {
 			return "docker pull "+$scope.IP+"/"+$scope.namespace+"/"+$scope.repository+":"+tag_name;
 		}
-		
 		$scope.doSomething = function () {
 			console.log("Text copied");
 		}
-		
 		$scope.setNewTag = function (nTag)
 		{
 			$scope.newTag=nTag;
 		}
-		
 		$scope.deleteTag = function (tag)
 		{
-				
 				$http.delete(URL+'/'+tag).success(function (data)
 				{
 					console.log('Deleted tag : '+tag);
@@ -290,7 +231,6 @@ app.controller('ImagesController', function($scope,$http,$location,$window,$cook
 		deleteRepoURL='http://'+$scope.IP+'/v1/repositories/'+$scope.namespace+'/'+ $scope.repository;
 		$scope.deleteRepo = function ()
 		{
-				
 				$http.delete(deleteRepoURL+'/').success(function (data)
 				{
 					console.log('Deleted Repo : '+$scope.repository);
@@ -298,11 +238,6 @@ app.controller('ImagesController', function($scope,$http,$location,$window,$cook
 					$route.reload();
 				}).error(function(data){});;
 		};
-		
-		/*This function gets 2 parameters the old tag before editand the new tag after edit.
-		 * This function will delete the old tag after getting the image id attached to it, use this image ID
-		 * to put the new tag in the repository, thus having the same effect as editing a tag.
-		 */ 
 		$scope.changeTag = function (oldTag,newTag)
 		{
 			$scope.oldTagURL=URL+'/'+oldTag;
@@ -314,7 +249,6 @@ app.controller('ImagesController', function($scope,$http,$location,$window,$cook
 			console.log('new tag is '+ newTag);
 			if(newTag !== undefined)
 			{
-				
 				$http({method: 'GET', url: $scope.oldTagURL }).success(function(data)
 				{
 					console.log('Data fetched : '+data);
@@ -336,19 +270,13 @@ app.controller('ImagesController', function($scope,$http,$location,$window,$cook
 					{
 						console.log('OldTag same as newTag ,no action taken');
 					}
-							
 				}).error(function(data){console.log('Unable to get image ID for tag')});
-			
 			}
 			else
 			{
 				console.log('New tag is empty. Not doing anything');
 			}	
-			
-			
-			
 		}
-		
 		$http({method: 'GET', url: URL }).success(function(data)
 		{
 			$scope.results=data;
@@ -364,4 +292,3 @@ app.controller('ImagesController', function($scope,$http,$location,$window,$cook
 		}).error(function(data){alert('Unable to request.')});
 	}
 });
-
