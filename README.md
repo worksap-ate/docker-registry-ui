@@ -2,7 +2,9 @@
 
 This projecct provides a web UI for [docker-registry](https://github.com/dotcloud/docker-registry).
 
-This application is written in JavaScript, you can find the necessary information from the Docker Registry by simply placing a file to a Web server.
+
+* This application is written in JavaScript, and you can deploy this application easily.
+* You can find the necessary information simply from the Docker Registry.
 
 > You can use this application with [odk211/docker-registry](https://registry.hub.docker.com/u/odk211/docker-registry/) which is added CORS support.
 >
