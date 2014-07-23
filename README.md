@@ -2,7 +2,7 @@
 
 This projecct provides a web UI for [docker-registry](https://github.com/dotcloud/docker-registry).
 
-This program is written in Javascript, you can find the necessary information from the Docker Registry by simply placing a file to a Web server.
+This program is written in JavaScript, you can find the necessary information from the Docker Registry by simply placing a file to a Web server.
 
 #### How to Use
 
