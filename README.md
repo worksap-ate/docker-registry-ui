@@ -2,12 +2,18 @@
 
 This projecct provides a web UI for [docker-registry](https://github.com/dotcloud/docker-registry).
 
+This program is written in Javascript, you can find the necessary information from the Docker Registry by simply placing a file to a Web server.
+
 #### How to Use
 
 We already deploy it to [github pages](http://worksap-ate.github.io/docker-registry-ui/#/).
 
 - Please set your docker-registry IP at "Set Registry IP" Button. 
 - You can use the Web UI.
+
+#### How to Install
+
+Put these files to a web server.
 
 #### Features
 
