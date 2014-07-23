@@ -305,6 +305,6 @@ app.controller('ImagesController', function($scope,$http,$location,$window,$cook
 				temp['id']=numTags;
 				$scope.tagsList.push(temp);
 			});		
-		}).error(function(data){alert('Unable to request.')});
+		}).error(function(data){alert('Unable to request. Maybe target server is not supported CORS tag APIs.')});
 	}
 });
