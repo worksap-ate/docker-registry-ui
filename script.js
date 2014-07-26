@@ -1,3 +1,19 @@
+/*
+ * Copyright 2014 Works Applications Co., Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 var app = angular.module('DockerWebUI', ['ngCookies','ngRoute','ngClipboard']);
 app.config(['ngClipProvider', function(ngClipProvider) { ngClipProvider.setPath("includes/bower_components/zeroclipboard/dist/ZeroClipboard.swf"); }]);
 app.config(function($httpProvider){
@@ -289,6 +305,6 @@ app.controller('ImagesController', function($scope,$http,$location,$window,$cook
 				temp['id']=numTags;
 				$scope.tagsList.push(temp);
 			});		
-		}).error(function(data){alert('Unable to request.')});
+		}).error(function(data){alert('Unable to request. Maybe target server is not supported CORS tag APIs.')});
 	}
 });
