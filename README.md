@@ -18,7 +18,7 @@ This project provides a web UI for [docker-registry](https://github.com/dotcloud
 docker run -d -p 80:5000 -e CORS_ORIGIN odk211/docker-registry
 ```
 
-We have already deployed it to our [github pages](http://worksap-ate.github.io/docker-registry-ui/#/).
+We have already deployed this web-ui to our [github pages](http://worksap-ate.github.io/docker-registry-ui/#/).
 
 - Please set your docker-registry IP at "Set Registry IP" option. 
 - And you can use the Web UI.
