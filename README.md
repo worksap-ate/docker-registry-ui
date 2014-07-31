@@ -15,7 +15,7 @@ This project provides a web UI for [docker-registry](https://github.com/dotcloud
 - Prepare CORS supported docker-registry.
 
 ```
-docker run -d -p 80:5000 -e CORS_ORIGIN odk211/docker-registry
+docker run -d -p 80:5000 -e CORS_ORIGINS=\'*\' odk211/docker-registry
 ```
 
 We have already deployed this web-ui to our [github pages](http://worksap-ate.github.io/docker-registry-ui/#/).
