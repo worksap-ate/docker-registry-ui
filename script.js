@@ -106,7 +106,7 @@ app.controller('NamespacesController', function($rootScope,$scope,$http,$route,$
 		$scope.dictionary={};
 		$scope.namespacesList=[];
 		results=[];
-		$http({method: 'GET', url: 'http://'+$scope.IP+'/v1/search'}).success(function(data)
+		$http({method: 'GET', url: $scope.IP+'/v1/search'}).success(function(data)
 		{
 			$scope.num_results=data.num_results;
 			results=data.results;
@@ -143,7 +143,7 @@ app.controller('NamespacesReposController', function($rootScope,$scope,$http,$ro
 			console.log('the ip is ' + $scope.IP);
 			$scope.num_results=0;
 			$scope.namespacesReposList=[];
-			$http({method: 'GET', url: 'http://'+$scope.IP+'/v1/search'}).success(function(data)
+			$http({method: 'GET', url: $scope.IP+'/v1/search'}).success(function(data)
 			{
 				$scope.num_results=data.num_results;
 				$scope.namespacesReposList=data.results;
@@ -155,7 +155,7 @@ app.controller('NamespacesReposController', function($rootScope,$scope,$http,$ro
 			console.log('the ip is ' + $scope.IP);
 			$scope.num_results=0;
 			$scope.namespacesReposList=[];
-			$http({method: 'GET', url: 'http://'+$scope.IP+'/v1/search'}).success(function(data)
+			$http({method: 'GET', url: $scope.IP+'/v1/search'}).success(function(data)
 			{
 				$scope.num_results=data.num_results;
 				angular.forEach(data.results,function(result)
@@ -183,7 +183,7 @@ app.controller('RepositoriesController', function($scope,$http,$location,$window
 		$scope.go = function (path) {
 		$location.path(path);
 		};
-		$http({method: 'GET', url: 'http://'+$scope.IP+'/v1/search'}).success(function(data)
+		$http({method: 'GET', url: $scope.IP+'/v1/search'}).success(function(data)
 		{
 			$scope.num_results=data.num_results;
 			results=data.results;
@@ -200,7 +200,7 @@ app.controller('RepositoriesController', function($scope,$http,$location,$window
 				}
 			});		
 		}).error(function(data){alert('Unable to request.')});
-		deleteRepoURL='http://'+$scope.IP+'/v1/repositories/'+$scope.namespace;
+		deleteRepoURL=$scope.IP+'/v1/repositories/'+$scope.namespace;
 		$scope.deleteRepo = function (repo)
 		{
 				$http.delete(deleteRepoURL+'/'+repo +'/').success(function (data)
@@ -224,7 +224,7 @@ app.controller('ImagesController', function($scope,$http,$location,$window,$cook
 		$scope.namespace=$location.search()['namespace'];
 		$scope.repository=$location.search()['repository'];
 		$scope.tagsList=[];
-		URL='http://'+$scope.IP+'/v1/repositories/'+$scope.namespace+'/'+$scope.repository+'/tags';
+		URL=$scope.IP+'/v1/repositories/'+$scope.namespace+'/'+$scope.repository+'/tags';
 		 $scope.getTextToCopy = function(tag_name) {
 			return "docker pull "+$scope.IP+"/"+$scope.namespace+"/"+$scope.repository+":"+tag_name;
 		}
@@ -244,7 +244,7 @@ app.controller('ImagesController', function($scope,$http,$location,$window,$cook
 					$route.reload();
 				}).error(function(data){alert('Unable to delete.')});;
 		};
-		deleteRepoURL='http://'+$scope.IP+'/v1/repositories/'+$scope.namespace+'/'+ $scope.repository;
+		deleteRepoURL=$scope.IP+'/v1/repositories/'+$scope.namespace+'/'+ $scope.repository;
 		$scope.deleteRepo = function ()
 		{
 				$http.delete(deleteRepoURL+'/').success(function (data)
