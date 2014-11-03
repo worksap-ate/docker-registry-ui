@@ -1,0 +1,58 @@
+<div class="row">
+	<div class="col-lg-4"></div>
+	<div class="col-lg-4"><center><h4> All repositories for {{IP}}/{{namespace}}  </h4></center></div>
+	<div class="col-lg-4">
+		
+		<div class="row">
+			<div class="col-lg-6"></div>
+			<div class="col-lg-1">
+				<label><h5>Sort</h5></label>
+			</div>
+			<div class="col-lg-4">
+				<div class="form-group">
+						<select class="form-control" ng-model="orderProp">
+							<option value="name">Name Asc.</option>
+							<option value="-name">Name Dec.</option>
+						</select>
+				</div>
+			</div>
+			
+		</div>
+	</div>						
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-header"> 
+		<div class="panel-body">	
+			<div class="wrap">
+				<div id='content'>
+					<input type="text" width=100% placeholder="Enter Filter Text Here." class="form-control" ng-model="queryRepository">
+				</div>	
+			</div>
+		</div>					
+	</div>
+	<div class="panel-body">
+		<div class="panel-body">				
+			<div class="wrap">
+				<div id='content'>
+					<div  ng-repeat="repository in repositoriesList | filter:queryRepository | orderBy:orderProp" or>	
+						<a ng-href="#showImages?namespace={{namespace}}&repository={{repository.name}}">
+							<div class="box">
+								<link rel="import" href="google.com">
+								<div class="boxInner">
+									
+									<center><h3>{{repository.name}}</h3></center>
+									
+									<div class="titleBox">
+										{{repository.name}} 
+										<!-- /.modal -->
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			 </div>
+		</div>	
+	</div>
+</div>

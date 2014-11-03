@@ -1,0 +1,162 @@
+<script>
+	function MethodonFirstPage()
+	{
+		alert('ABRA KA DABRA');
+	}
+	
+</script>
+
+<div class="row">
+	<div class="col-lg-4">
+		<div class="row">
+			<div class="col-lg-1">
+			</div>
+			<div class="col-lg-5">
+				<button type="button" id="deleteRepo" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#repoDelete" ng-click="">Delete Repository</button>
+				<div class="modal fade" id="repoDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+								<h4 class="modal-title" id="myModalLabel">Confirm Delete Repository</h4>
+							</div>
+							<div class="modal-body">
+								<center>
+								<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="deleteRepo()">YES</button>
+								</center>
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+			</div>
+		</div>					
+	</div>
+	
+	<div class="col-lg-4"><center><h4> Repository Details - {{IP}}/{{namespace}}/{{repository}} </h4></center></div>
+	
+	<div class="col-lg-4">		
+		<div class="row">
+			<div class="col-lg-6"></div>
+			<div class="col-lg-1">
+				<label><h5>Sort</h5></label>
+			</div>
+			<div class="col-lg-4">
+				<div class="form-group">
+						<select class="form-control" ng-model="orderProp">
+							<option value="name">Name Asc.</option>
+							<option value="-name">Name Dec.</option>
+						</select>
+				</div>
+			</div>
+			
+		</div>
+	</div>						
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-header"> 
+		<div class="panel-body">	
+			<div class="wrap">
+				<div id='content'>
+					<input type="text" width=100% placeholder="Enter Filter Text Here." class="form-control" ng-model="queryTag">
+				</div>	
+			</div>
+		</div>					
+	</div>
+	<div class="panel-body"> 
+		<div class="panel-body">	
+			<div class="wrap">
+				<div id='content'>
+					<div class="row">
+						<div class="col-lg-3">
+							<h3>Repository</h3>
+						</div>
+						<div class="col-lg-1">
+							<h3>Tag</h3>
+						</div>		
+					</div>	
+					<div  ng-repeat="tag in tagsList | filter:queryTag | orderBy:orderProp">	
+						<div class="alert alert-success">
+							<div class="row">							
+								<div class="col-lg-3">
+									<h4>{{repository}}</h4>
+								</div>
+								<div class="col-lg-1">
+									<h4>{{tag.name}}</h4>
+								</div>
+								<div class="col-lg-1">
+									<div ng-if="tag.name!='latest'">							
+										<button type="button" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#tagDelete{{tag.id}}" ng-click=""><i class="fa fa-times"></i></button>
+											<div class="modal fade" id="tagDelete{{tag.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+														<h4 class="modal-title" id="myModalLabel">Confirm Delete Tag</h4>
+													</div>
+													<div class="modal-body">
+														<center>
+														<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="deleteTag(tag.name)">YES</button>
+														</center>
+													</div>
+												</div>
+												<!-- /.modal-content -->
+											</div>
+											<!-- /.modal-dialog -->
+										</div>
+										<!-- /.modal -->
+									</div>	
+								</div>
+								<div class="col-lg-1">
+									<button type="button" class="btn btn-info btn-circle" clip-copy="getTextToCopy(tag.name)" clip-click="doSomething()"><i class="fa fa-check"></i></button>	
+												
+								</div>
+								<div class="col-lg-1">
+									<div ng-if="tag.name!='latest'">
+									<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#tagModal{{tag.id}}" ng-click="setNewTag(tag.name)">Edit Tag</button>
+									<!-- Modal -->
+									<div class="modal fade" id="tagModal{{tag.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+													<h4 class="modal-title" id="myModalLabel">Edit Tag</h4>
+												</div>
+												<div class="modal-body">
+													<form role="form" >
+														<div class="form-group">
+															<label>Tag Name:</label>
+															<input type="text" contentEditable=true class="form-control" placeholder={{tag.name}} ng-model="newTag" onkeydown="if (event.keyCode == 13) document.getElementById('setTag').click()">
+														</div>
+													</form>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+													<button type="button" class="btn btn-primary" data-dismiss="modal" id ="setTag" ng-click="changeTag(tag.name,newTag)">Save changes</button>
+												</div>
+											</div>
+											<!-- /.modal-content -->
+										</div>
+										<!-- /.modal-dialog -->
+									</div>
+									<!-- /.modal -->
+									</div>
+								
+								</div>		
+										 
+							</div>
+						
+						</div>
+					</div>	
+				</div>
+			 </div>
+		</div>
+	</div>	
+</div>

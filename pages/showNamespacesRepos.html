@@ -1,0 +1,65 @@
+<div class="row">
+	<div class="col-lg-4">
+		<div class="row">
+			<div class="col-lg-1">
+			</div>
+			<div class="col-lg-5">
+				<button type="button" class="btn btn-primary btn-sm" onclick=(window.location.assign("#showNamespaces"))>Toggle</button>
+			</div>
+		</div>					
+	</div>
+	
+	<div class="col-lg-4"><center><h4> All Namespaces/Repos- {{IP}}  </h4></center></div>
+	
+	<div class="col-lg-4">
+		<div class="row">
+			<div class="col-lg-6"></div>
+			<div class="col-lg-1">
+				<label><h5>Sort</h5></label>
+			</div>
+			<div class="col-lg-4">
+				<div class="form-group">
+						<select class="form-control" ng-model="orderProp">
+							<option value="name">Name Asc.</option>
+							<option value="-name">Name Dec.</option>
+						</select>
+				</div>
+			</div>
+			
+		</div>
+	</div>						
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-header"> 
+		<div class="panel-body">	
+			<div class="wrap">
+				<div id='content'>
+					<input type="text" width=100% placeholder="Enter Filter Text Here." class="form-control" ng-model="queryNamespaceRepo">
+				</div>	
+			</div>
+		</div>					
+	</div>
+	<div class="panel-body"> 
+		<div class="panel-body">	
+			<div class="wrap">
+				<div id='content'>
+					<div  ng-repeat="result in namespacesReposList | filter:queryNamespaceRepo | orderBy:orderProp">
+						<a href="#showImages?namespace={{result.name.split('/')[0]}}&repository={{result.name.split('/')[1]}}">
+							<div class="box">
+								<div class="boxInner">
+									<center><h3>{{result.name}}</h3></center>
+									<div class="titleBox">
+										{{result.name}}
+									</div>
+								</div>	
+							</div>
+						</a>	
+					</div>
+				</div>
+			 </div>
+		</div>
+	</div>	
+</div>
+		
+		
