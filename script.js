@@ -43,57 +43,37 @@ app.config(function($routeProvider) {
 		});
 });
 app.controller('MainController', ['$scope','$route','$window','$cookies','$location',function($scope,$route,$window,$cookies,$location) {
-	function ValidateIPaddress(inputText)
+	var paramIP = $location.search()['IP'] || '';
+	var paramProtocol = $location.search()['protocol'] || 'http';
+	if(paramIP!=='')
 	{
-		var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-		if(inputText.match(ipformat))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	$scope.paramIP=$location.search()['IP'];
-	if($scope.paramIP!==undefined)
-	{
-		if(ValidateIPaddress($scope.paramIP)===true)
-		{
-			$cookies.IP=$scope.paramIP;
-			console.log('the IP has been changed to '+$cookies.IP);
-			$window.location.href = "#showNamespaces";
-			$route.reload();
-		}
-		else
-		{
-			alert('Invalid IP');
-		}
-	}
-	$scope.inputIP='';
-	$scope.getIP=function()
-	{
-		$scope.inputIP=$cookies.IP;
-		console.log('the current IP has been to '+$cookies.IP);
-	}
-	$scope.setIP=function()
-	{
-		$cookies.IP=$scope.inputIP;
-		console.log('the IP has been changed to '+$cookies.IP);
+		$cookies.IP=paramIP;
+		$cookies.protocol=paramProtocol;
+		console.log('the ip has been changed to ' + $cookies.protocol + '://' + $cookies.IP);
 		$window.location.href = "#showNamespaces";
 		$route.reload();
 	}
-	if($cookies.IP!==undefined)
+	$scope.ip = paramIP;
+	$scope.protocol = paramProtocol;
+	$scope.getIP=function()
 	{
-		if($window.location == "http://localhost:8000/#/")
-		{
-			$window.location.href="#showNamespaces";
-			$route.reload();
-		}
+		$scope.ip = $cookies.IP;
+		$scope.protocol = $cookies.protocol;
+		console.log('getIP the current IP has been to '+$cookies.IP);
+	}
+	$scope.setIP=function()
+	{
+		$cookies.IP=$scope.ip;
+		$cookies.protocol=$scope.protocol;
+		console.log('the IP has been changed to '+$cookies.IP);
+		console.log('the protocol has been changed to '+$cookies.protocol);
+		$window.location.href = "#showNamespaces";
+		$route.reload();
 	}
 }]);
 app.controller('NamespacesController', function($rootScope,$scope,$http,$route,$cookies,$window,$location) {
 	$scope.IP=$cookies.IP;
+	$scope.protocol=$cookies.protocol;
 	if($scope.IP===undefined)
 	{
 		$window.location.href="#";
@@ -106,7 +86,7 @@ app.controller('NamespacesController', function($rootScope,$scope,$http,$route,$
 		$scope.dictionary={};
 		$scope.namespacesList=[];
 		results=[];
-		$http({method: 'GET', url: 'http://'+$scope.IP+'/v1/search'}).success(function(data)
+		$http({method: 'GET', url: $scope.protocol+'://'+$scope.IP+'/v1/search'}).success(function(data)
 		{
 			$scope.num_results=data.num_results;
 			results=data.results;
@@ -129,6 +109,7 @@ app.controller('NamespacesController', function($rootScope,$scope,$http,$route,$
 });
 app.controller('NamespacesReposController', function($rootScope,$scope,$http,$route,$cookies,$location,$window) {
 	$scope.IP=$cookies.IP;
+	$scope.protocol=$cookies.protocol;
 	if($scope.IP===undefined)
 	{
 		$window.location.href="#";
@@ -139,11 +120,9 @@ app.controller('NamespacesReposController', function($rootScope,$scope,$http,$ro
 		$scope.queryAll=$location.search()['queryAll'];
 		if($scope.queryAll === undefined || $scope.queryAll === "")
 		{
-			$scope.IP=$cookies.IP;
-			console.log('the ip is ' + $scope.IP);
 			$scope.num_results=0;
 			$scope.namespacesReposList=[];
-			$http({method: 'GET', url: 'http://'+$scope.IP+'/v1/search'}).success(function(data)
+			$http({method: 'GET', url: $scope.protocol+'://'+$scope.IP+'/v1/search'}).success(function(data)
 			{
 				$scope.num_results=data.num_results;
 				$scope.namespacesReposList=data.results;
@@ -155,7 +134,7 @@ app.controller('NamespacesReposController', function($rootScope,$scope,$http,$ro
 			console.log('the ip is ' + $scope.IP);
 			$scope.num_results=0;
 			$scope.namespacesReposList=[];
-			$http({method: 'GET', url: 'http://'+$scope.IP+'/v1/search'}).success(function(data)
+			$http({method: 'GET', url: $scope.protocol+'://'+$scope.IP+'/v1/search'}).success(function(data)
 			{
 				$scope.num_results=data.num_results;
 				angular.forEach(data.results,function(result)
@@ -170,6 +149,7 @@ app.controller('NamespacesReposController', function($rootScope,$scope,$http,$ro
 });
 app.controller('RepositoriesController', function($scope,$http,$location,$window,$cookies,$route) {
 	$scope.IP=$cookies.IP;
+	$scope.protocol=$cookies.protocol;
 	if($scope.IP===undefined)
 	{
 		$window.location.href="#";
@@ -183,7 +163,7 @@ app.controller('RepositoriesController', function($scope,$http,$location,$window
 		$scope.go = function (path) {
 		$location.path(path);
 		};
-		$http({method: 'GET', url: 'http://'+$scope.IP+'/v1/search'}).success(function(data)
+		$http({method: 'GET', url: $scope.protocol+'://'+$scope.IP+'/v1/search'}).success(function(data)
 		{
 			$scope.num_results=data.num_results;
 			results=data.results;
@@ -200,7 +180,7 @@ app.controller('RepositoriesController', function($scope,$http,$location,$window
 				}
 			});		
 		}).error(function(data){alert('Unable to request.')});
-		deleteRepoURL='http://'+$scope.IP+'/v1/repositories/'+$scope.namespace;
+		deleteRepoURL=$scope.protocol+'://'+$scope.IP+'/v1/repositories/'+$scope.namespace;
 		$scope.deleteRepo = function (repo)
 		{
 				$http.delete(deleteRepoURL+'/'+repo +'/').success(function (data)
@@ -214,6 +194,7 @@ app.controller('RepositoriesController', function($scope,$http,$location,$window
 });
 app.controller('ImagesController', function($scope,$http,$location,$window,$cookies,$route) {
 	$scope.IP=$cookies.IP;
+	$scope.protocol=$cookies.protocol;
 	if($scope.IP===undefined)
 	{
 		$window.location.href="#";
@@ -224,7 +205,7 @@ app.controller('ImagesController', function($scope,$http,$location,$window,$cook
 		$scope.namespace=$location.search()['namespace'];
 		$scope.repository=$location.search()['repository'];
 		$scope.tagsList=[];
-		URL='http://'+$scope.IP+'/v1/repositories/'+$scope.namespace+'/'+$scope.repository+'/tags';
+		URL=$scope.protocol+'://'+$scope.IP+'/v1/repositories/'+$scope.namespace+'/'+$scope.repository+'/tags';
 		 $scope.getTextToCopy = function(tag_name) {
 			return "docker pull "+$scope.IP+"/"+$scope.namespace+"/"+$scope.repository+":"+tag_name;
 		}
@@ -244,7 +225,7 @@ app.controller('ImagesController', function($scope,$http,$location,$window,$cook
 					$route.reload();
 				}).error(function(data){alert('Unable to delete.')});;
 		};
-		deleteRepoURL='http://'+$scope.IP+'/v1/repositories/'+$scope.namespace+'/'+ $scope.repository;
+		deleteRepoURL=$scope.protocol+'://'+$scope.IP+'/v1/repositories/'+$scope.namespace+'/'+ $scope.repository;
 		$scope.deleteRepo = function ()
 		{
 				$http.delete(deleteRepoURL+'/').success(function (data)

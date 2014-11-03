@@ -153,18 +153,23 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-								<center><h4 class="modal-title" id="myModalLabel">Change registry</h4></center>
+								<center><h4 class="modal-title" id="myModalLabel">Enter Your Docker Registry</h4></center>
 							</div>
 							<div class="modal-body">
 								<form role="form" >
 									<div class="form-group">
-										<label>Enter IP address</label>
-                                        <input class="form-control" placeholder="IP Address" ng-model="inputIP"  onkeydown="if (event.keyCode == 13) document.getElementById('setIP').click()">
+										<span class="input-group-addon">
+											<input type="radio" ng-model="protocol" id="protocol-http" value="http">
+											<label for="protocol-http">http</label>
+											<input type="radio" ng-model="protocol" id="protocol-https" value="https">
+											<label for="protocol-https">https</label>
+										</span>
+                                        <input class="form-control" placeholder="IP Address" ng-model="ip"  onkeydown="if (event.keyCode == 13) document.getElementById('setIP').click()">
                                     </div>
 								</form>
 							</div>
 							<div class="modal-footer">
-								<center><button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="setIP" ng-click="setIP(inputIP)" >Confirm</button></center>
+								<center><button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="setIP" ng-click="setIP(ip)" >Confirm</button></center>
 							</div>
 						</div>
 						<!-- /.modal-content -->
