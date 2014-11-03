@@ -57,8 +57,8 @@ app.controller('MainController', ['$scope','$route','$window','$cookies','$locat
 	$scope.protocol = paramProtocol;
 	$scope.getIP=function()
 	{
-		$scope.ip = $cookies.IP;
-		$scope.protocol = $cookies.protocol;
+		$scope.ip = $cookies.IP || '';
+		$scope.protocol = $cookies.protocol || 'http';
 		console.log('getIP the current IP has been to '+$cookies.IP);
 	}
 	$scope.setIP=function()
