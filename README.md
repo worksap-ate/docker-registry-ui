@@ -1,5 +1,7 @@
 # Docker Registry UI
 
+[![wercker status](https://app.wercker.com/status/6a4a2e14de08a4e0e359285300cf1965/s/master "wercker status")](https://app.wercker.com/project/bykey/6a4a2e14de08a4e0e359285300cf1965)
+
 This project provides a web UI for [docker-registry](https://github.com/dotcloud/docker-registry).
 
 
