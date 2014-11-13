@@ -2,16 +2,12 @@
 
 [![wercker status](https://app.wercker.com/status/6a4a2e14de08a4e0e359285300cf1965/s/master "wercker status")](https://app.wercker.com/project/bykey/6a4a2e14de08a4e0e359285300cf1965)
 
-This project provides a web UI for [docker-registry](https://github.com/dotcloud/docker-registry).
-
+This project provides a web UI for [docker-registry](https://github.com/dotcloud/docker-registry) ([library/registry](https://registry.hub.docker.com/u/library/registry/) (>= 9.0)).
 
 * This application is written in JavaScript, and you can deploy this application easily.
+* This application doesn't store any user data.
 * You can find the necessary information simply from the Docker Registry [documentation](https://docs.docker.com/reference/api/registry_api/).
 
-> The pull request which we sent [#484](https://github.com/dotcloud/docker-registry/pull/484) is merged.
-> You can use original Docker Registry. (but the v0.8.1 is not merged this patch yet. you should use master branch till v0.8.2 is released. Or you can use with [odk211/docker-registry](https://registry.hub.docker.com/u/odk211/docker-registry/) which is built from master branch at Oct/24/2014.)
->
-> ~~This application needs CORS support for some of its features. But Docker Registry does not support it yet [#345](https://github.com/dotcloud/docker-registry/pull/345). We sent a pull request [#484](https://github.com/dotcloud/docker-registry/pull/484) for the same, but you cannot use this application using original Docker registry until the request is merged.~~
 
 #### How to Use
 
@@ -26,7 +22,7 @@ We have already deployed this web-ui to our [github pages](http://worksap-ate.gi
 - Please set your docker-registry IP at "Set Registry IP" option. 
 - And you can use the Web UI.
 
-#### How to Install
+#### How to Install to your own server
 
 Download the source code and put these files to a web server.
 
