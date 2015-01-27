@@ -44,3 +44,12 @@ Download the source code and put these files to a web server.
   1. Registry can be set through query parameter
     * User can input the regitsty IP as a query parameter like : http://worksap-ate.github.io/docker-registry-ui/#/?IP=xxx.xxx.xxx.xxx
       This way user can bookmark the registry directly.
+
+#### Trouble Shooting
+  1. Cannot connect to Docker registry
+    1. Check your Docker registry version
+      * This docker registry UI needs CORS support on Docker registry. It's supported from version 9.0.
+      * If you use under version 9.0, Please upgrade it.
+    2. Check your CORS support settings
+      * This system connects to your Docker registry using CORS.
+      * Please set the [CORS configuration](https://github.com/docker/docker-registry/blob/master/ADVANCED.md#cors) to your Docker registry.
