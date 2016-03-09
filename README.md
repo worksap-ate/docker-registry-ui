@@ -6,7 +6,7 @@ This project provides a web UI for [docker-registry](https://github.com/dotcloud
 
 * This application is written in JavaScript, and you can deploy this application easily.
 * This application doesn't store any user data.
-* You can find the necessary information simply from the Docker Registry [documentation](https://docs.docker.com/reference/api/registry_api/).
+* You can find the necessary information simply from the Docker Registry [documentation](https://github.com/docker/docker-registry).
 
 
 #### How to Use
