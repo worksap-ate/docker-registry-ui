@@ -43,7 +43,7 @@ app.config(function($routeProvider) {
 		});
 });
 app.controller('MainController', ['$scope','$route','$window','$cookies','$location',function($scope,$route,$window,$cookies,$location) {
-	var paramIP = $location.search()['IP'] || '';
+	var paramIP = $location.search()['IP'] || location.host;
 	var paramProtocol = $location.search()['protocol'] || 'http';
 	if(paramIP!=='')
 	{
